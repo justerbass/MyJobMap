@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyJobMap</string>
+    <string name="Splash">Splash Screen</string>
 </resources>

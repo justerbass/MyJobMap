@@ -78,8 +78,8 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
 
     //navegacion
-    implementation("androidx.navigation:navigation-compose:2.8.1")
-    implementation("androidx.compose.ui:ui:1.7.2")
+    implementation("androidx.navigation:navigation-compose:2.8.4")
+    implementation("androidx.compose.ui:ui:1.7.5")
 
 
     //gson
