@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import cl.app.myjobmap.view.MainView
+import cl.app.myjobmap.view.NewJob
 import cl.app.myjobmap.view.SplashScreen
 import cl.app.myjobmap.viewModel.PostulationViewModel
 
@@ -23,6 +24,10 @@ fun NavManager(){
 
         composable(Screen.MainView.route){
             MainView(navControler, viewModel)
+        }
+
+        composable(Screen.NewJob.route){
+            NewJob(navControler, viewModel)
         }
     }
 }

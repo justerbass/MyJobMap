@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.JobCard
+import cl.app.myjobmap.naviagation.Screen
 import cl.app.myjobmap.viewModel.PostulationViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -39,7 +40,7 @@ fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    /*TODO*/
+                    navControler.navigate(Screen.NewJob.route)
                 }
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = null)

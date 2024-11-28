@@ -32,7 +32,7 @@ class PostulationViewModel @Inject constructor(private val postulationRepository
     }
 
 //    answer Job
-    private var _answerJob = mutableStateOf("no")
+    private var _answerJob = mutableStateOf("")
     var answerJob = _answerJob
 
 }

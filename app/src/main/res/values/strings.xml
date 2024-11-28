@@ -2,4 +2,6 @@
     <string name="app_name">MyJobMap</string>
     <string name="Splash">Splash Screen</string>
     <string name="mainview">Trabajos Postulados</string>
+    <string name="NewJob">Agregar Nueva Postulación</string>
+    <string name="back">Regresar</string>
 </resources>
