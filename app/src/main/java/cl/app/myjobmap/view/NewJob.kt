@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
@@ -55,12 +56,12 @@ fun NewJob(
                     IconButton(onClick = { navControler.navigate(Screen.MainView.route) }
                         ) {
                         Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = R.string.back.toString()
+                            contentDescription = stringResource(id = R.string.back)
                         )
                     }
                 },
                 title = {
-                    Text(text = R.string.NewJob.toString())
+                    Text(text = stringResource(id = R.string.NewJob))
                 }
             )
         },

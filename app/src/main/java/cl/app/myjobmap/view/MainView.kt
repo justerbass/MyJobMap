@@ -19,6 +19,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.JobCard
@@ -33,7 +34,7 @@ fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = R.string.mainview.toString())
+                    Text(text = stringResource(id = R.string.mainview))
                 }
             )
         },
