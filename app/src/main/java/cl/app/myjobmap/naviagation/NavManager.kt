@@ -12,9 +12,8 @@ import cl.app.myjobmap.viewModel.PostulationViewModel
 
 
 @Composable
-fun NavManager(){
+fun NavManager(viewModel: PostulationViewModel){
     val navControler = rememberNavController()
-    val viewModel : PostulationViewModel = viewModel()
 
     NavHost(navController = navControler, startDestination = Screen.SplashScreen.route){
 

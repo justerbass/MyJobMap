@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-//    id("kotlin-kapt")
+    id("kotlin-kapt")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
 }
@@ -51,9 +51,9 @@ android {
         }
     }
 
-//    kapt{
-//        correctErrorTypes = true
-//    }
+    kapt{
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -77,7 +77,7 @@ dependencies {
     //room
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
-//    kapt("androidx.room:room-compiler:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 
     //navegacion
     implementation("androidx.navigation:navigation-compose:2.8.4")
@@ -91,12 +91,12 @@ dependencies {
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
-//    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
 //    KSP por si acaso
-    annotationProcessor(libs.room.compiler)
-    ksp(libs.hilt.compiler)
-    ksp(libs.androidx.hilt.compiler)
+//    annotationProcessor(libs.room.compiler)
+//    ksp(libs.hilt.compiler)
+//    ksp(libs.androidx.hilt.compiler)
 }
 
