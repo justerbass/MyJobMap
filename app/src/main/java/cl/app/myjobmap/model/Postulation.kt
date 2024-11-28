@@ -24,4 +24,7 @@ data class Postulation (
     @ColumnInfo(name = "salary")
     val salary: String,
 
+    @ColumnInfo(name = "recruiter")
+    val recruiter: String
+
 )

@@ -1,5 +1,6 @@
 package cl.app.myjobmap.viewModel
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cl.app.myjobmap.model.Postulation
@@ -13,6 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PostulationViewModel @Inject constructor(private val postulationRepository: PostulationRepository) : ViewModel() {
 
+//    DATABASE
     fun getAllPostulations() : Flow<List<Postulation>> {
       return postulationRepository.getAllPostulations()
     }
@@ -28,4 +30,9 @@ class PostulationViewModel @Inject constructor(private val postulationRepository
     fun deletePostulation(postulation: Postulation) = viewModelScope.launch (Dispatchers.IO){
         postulationRepository.deletePostulation(postulation)
     }
+
+//    answer Job
+    private var _answerJob = mutableStateOf("no")
+    var answerJob = _answerJob
+
 }

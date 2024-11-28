@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MyJobMap</string>
     <string name="Splash">Splash Screen</string>
+    <string name="mainview">Trabajos Postulados</string>
 </resources>
