@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Separation
@@ -52,28 +54,34 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     .padding(paddingValues)
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.SpaceAround
             ) {
                 Text(text = "Portal Postulado")
-                Separation()
+//                Separation()
                 Text(text = "nombre DB")
-                Separation()
+//                Separation()
                 Text(text = "Puesto Postulado")
-                Separation()
+//                Separation()
                 Text(text = "nombre DB")
-                Separation()
+//                Separation()
                 Text(text = "Fecha de Postulacion")
-                Separation()
+//                Separation()
                 Text(text = "nombre DB")
-                Separation()
+//                Separation()
                 Text(text = "Respondieron a la postulacion")
-                Separation()
+//                Separation()
                 Row (
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ){
+                    Button(onClick = { /*TODO*/ }) {
+                        Text(text = "si")
+                    }
 
+                    Button(onClick = { navController.navigate(Screen.MainView.route) }) {
+                        Text(text = "no")
+                    }
                 }
 
             }
