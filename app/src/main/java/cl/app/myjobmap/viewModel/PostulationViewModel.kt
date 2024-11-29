@@ -19,6 +19,10 @@ class PostulationViewModel @Inject constructor(private val postulationRepository
       return postulationRepository.getAllPostulations()
     }
 
+    fun getPostulationById(id: Int) : Flow<Postulation> {
+        return postulationRepository.getPostulationById(id)
+    }
+
     fun insertPostulation(postulation: Postulation) = viewModelScope.launch (Dispatchers.IO){
         postulationRepository.insertPostulation(postulation)
     }
@@ -30,9 +34,5 @@ class PostulationViewModel @Inject constructor(private val postulationRepository
     fun deletePostulation(postulation: Postulation) = viewModelScope.launch (Dispatchers.IO){
         postulationRepository.deletePostulation(postulation)
     }
-
-//    answer Job
-    private var _answerJob = mutableStateOf("")
-    var answerJob = _answerJob
 
 }

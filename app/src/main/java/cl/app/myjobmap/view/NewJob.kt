@@ -45,7 +45,6 @@ fun NewJob(
     val salary = remember { mutableStateOf("")}
     val other = remember { mutableStateOf("")}
     val date = remember { mutableStateOf("")}
-    val answer = remember { mutableStateOf("")}
 
 
 
@@ -70,8 +69,6 @@ fun NewJob(
                 onClick = {
                     navControler.navigate(Screen.MainView.route)
                     date.value = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                    answer.value = "Sin Respuesta"
-                    viewModel.answerJob.value = answer.value
 
                     val newPostulation = Postulation(
                         job = postulation.value,
@@ -79,7 +76,8 @@ fun NewJob(
                         date = date.value,
                         jobDescription = description.value,
                         salary = salary.value,
-                        recruiter = recruiter.value
+                        recruiter = recruiter.value,
+                        answer = "Sin Respuesta"
                     )
                     viewModel.insertPostulation(newPostulation)
                 }
@@ -92,7 +90,7 @@ fun NewJob(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             OutlinedTextField(

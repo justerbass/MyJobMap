@@ -15,6 +15,9 @@ interface PostulationDao {
     @Query("SELECT * FROM postulations")
     fun getAllPostulations(): Flow<List<Postulation>>
 
+    @Query("SELECT * FROM postulations WHERE id = :id")
+    fun getPostulationById(id: Int): Flow<Postulation>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPostulation(postulation: Postulation)
 

@@ -68,16 +68,18 @@ fun ShowJobs(
 ) {
     val jobs by viewModel.getAllPostulations().collectAsState(initial = emptyList())
     LazyColumn {
-        items(jobs) {job ->
+        items(jobs) { job ->
             JobCard(jobTitle = job.job,
                 companyName = job.company,
                 recruiterName = job.recruiter,
                 date = job.date,
-                answer = viewModel.answerJob.value) {
+                answer = job.answer,
+                onClick = { navControler.navigate(Screen.Answer.route) },
 
-            }
+            )
         }
     }
 }
+
 
 

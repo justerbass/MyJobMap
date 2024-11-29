@@ -4,4 +4,5 @@
     <string name="mainview">Trabajos Postulados</string>
     <string name="NewJob">Agregar Nueva Postulación</string>
     <string name="back">Regresar</string>
+    <string name="answer">Estado de la postulación</string>
 </resources>
