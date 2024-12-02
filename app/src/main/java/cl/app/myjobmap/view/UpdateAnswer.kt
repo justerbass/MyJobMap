@@ -52,7 +52,7 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
                 Button(onClick = {
                     job.value?.answer = "Llamado a Entrevista"
                     viewModel.updatePostulation(job.value!!)
-                    navController.navigate(Screen.MainView.route)
+                    navController.navigate(Screen.Interview.route)
                 }
                 ) {
                     Text(text = "Entrevista")
