@@ -83,12 +83,17 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     Button(onClick = {
                         job.value?.answer = "Respondido"
                         viewModel.updatePostulation(job.value!!)
+                        navController.navigate(Screen.UpdateAnswer.route)
                     }
                     ) {
                         Text(text = "si")
                     }
 
-                    Button(onClick = { navController.navigate(Screen.MainView.route) }) {
+                    Button(onClick = {
+                        navController.navigate(Screen.MainView.route)
+                        job.value?.answer = "Sin Respuesta"
+                        viewModel.updatePostulation(job.value!!)
+                    }) {
                         Text(text = "no")
                     }
                 }

@@ -5,4 +5,5 @@ sealed class Screen ( val route: String){
     object MainView: Screen("main_view")
     object NewJob: Screen("new_job")
     object Answer: Screen("answer")
+    object UpdateAnswer: Screen("update_answer")
 }
