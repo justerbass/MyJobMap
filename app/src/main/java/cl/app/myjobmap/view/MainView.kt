@@ -74,7 +74,8 @@ fun ShowJobs(
                 recruiterName = job.recruiter,
                 date = job.date,
                 answer = job.answer,
-                onClick = { navControler.navigate(Screen.Answer.route) },
+                onClick = { navControler.navigate(Screen.Answer.route)
+                          viewModel.listenID.value = job.id},
 
             )
         }

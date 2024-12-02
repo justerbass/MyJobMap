@@ -16,6 +16,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -54,19 +55,23 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     .padding(paddingValues)
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceAround
+                verticalArrangement = Arrangement.SpaceEvenly
             ) {
+
+                val id = viewModel.listenID.value
+                val job = viewModel.getPostulationById(id).collectAsState(initial = null)
+
                 Text(text = "Portal Postulado")
 //                Separation()
-                Text(text = "nombre DB")
+                Text(text = job.value?.recruiter.toString())
 //                Separation()
                 Text(text = "Puesto Postulado")
 //                Separation()
-                Text(text = "nombre DB")
+                Text(text = job.value?.job.toString())
 //                Separation()
                 Text(text = "Fecha de Postulacion")
 //                Separation()
-                Text(text = "nombre DB")
+                Text(text = job.value?.date.toString())
 //                Separation()
                 Text(text = "Respondieron a la postulacion")
 //                Separation()
@@ -75,7 +80,11 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ){
-                    Button(onClick = { /*TODO*/ }) {
+                    Button(onClick = {
+                        job.value?.answer = "Respondido"
+                        viewModel.updatePostulation(job.value!!)
+                    }
+                    ) {
                         Text(text = "si")
                     }
 
@@ -83,6 +92,7 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                         Text(text = "no")
                     }
                 }
+//                Separation()
 
             }
     }

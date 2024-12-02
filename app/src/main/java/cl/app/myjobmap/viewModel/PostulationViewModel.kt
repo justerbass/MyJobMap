@@ -8,6 +8,7 @@ import cl.app.myjobmap.repository.PostulationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,5 +35,8 @@ class PostulationViewModel @Inject constructor(private val postulationRepository
     fun deletePostulation(postulation: Postulation) = viewModelScope.launch (Dispatchers.IO){
         postulationRepository.deletePostulation(postulation)
     }
+
+//    edit answer
+    var listenID : MutableStateFlow<Int> = MutableStateFlow(0)
 
 }

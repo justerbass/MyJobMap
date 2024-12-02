@@ -46,8 +46,6 @@ fun NewJob(
     val other = remember { mutableStateOf("")}
     val date = remember { mutableStateOf("")}
 
-
-
     Scaffold (
         topBar = {
             CenterAlignedTopAppBar(

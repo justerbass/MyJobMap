@@ -28,6 +28,6 @@ data class Postulation (
     val recruiter: String,
 
     @ColumnInfo(name = "answer")
-    val answer: String
+    var answer: String
 
 )
