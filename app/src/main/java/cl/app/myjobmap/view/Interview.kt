@@ -21,9 +21,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Separation
 import cl.app.myjobmap.naviagation.Screen
 import cl.app.myjobmap.viewModel.PostulationViewModel
@@ -40,6 +42,11 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
     val interviewHour = remember { mutableStateOf("") }
     val interviewPlace = remember { mutableStateOf("") }
     val interviewModal = remember { mutableStateOf("") }
+    val interviewOrganizer = remember { mutableStateOf("") }
+
+    val interview = stringResource(id = R.string.interview)
+    val modal = stringResource(id = R.string.modal)
+    val organizer = stringResource(id = R.string.interview_organizer)
 
     val calendar = Calendar.getInstance()
     val datePickerDialog = DatePickerDialog(
@@ -62,46 +69,11 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
         true
     )
 
-    fun addEventDirectlyToCalendar(
-        context: Context,
-        title: String,
-        location: String,
-        description: String,
-        startTime: Long,
-        endTime: Long
-    ) {
-        val event = ContentValues().apply {
-            put(CalendarContract.Events.CALENDAR_ID, 1) // ID del calendario principal
-            put(CalendarContract.Events.TITLE, title)
-            put(CalendarContract.Events.EVENT_LOCATION, location)
-            put(CalendarContract.Events.DESCRIPTION, description)
-            put(CalendarContract.Events.DTSTART, startTime)
-            put(CalendarContract.Events.DTEND, endTime)
-            put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().id)
-        }
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR)
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            val uri = context.contentResolver.insert(CalendarContract.Events.CONTENT_URI, event)
-            if (uri != null) {
-                Toast.makeText(context, "Evento agregado al calendario", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "Error al agregar el evento", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            ActivityCompat.requestPermissions(
-                (context as Activity),
-                arrayOf(Manifest.permission.WRITE_CALENDAR),
-                1
-            )
-        }
-    }
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "Detalles de la Entrevista a\n" + job.value?.job.toString())
+                    Text(text = stringResource(id = R.string.details_interview) + "\n" + job.value?.job.toString())
                 }
             )
         },
@@ -111,28 +83,28 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
                     data = CalendarContract.Events.CONTENT_URI
                     putExtra(
                         CalendarContract.Events.TITLE,
-                        "Entrevista: " + job.value?.job.toString()
+                        interview + job.value?.job.toString()
                     )
                     putExtra(CalendarContract.Events.EVENT_LOCATION, interviewPlace.value)
                     putExtra(
                         CalendarContract.Events.DESCRIPTION,
-                        "Modalidad: " + interviewModal.value
-                    )
+                        modal + interviewModal.value + "\n" +
+                        interviewOrganizer + interviewOrganizer.value)
 
                     val dateParts = interviewDate.value.split("-")
                     val timeParts = interviewHour.value.split(":")
                     if (dateParts.size == 3 && timeParts.size == 2) {
                         val startTime = Calendar.getInstance().apply {
                             set(
-                                dateParts[2].toInt(), // Año
-                                dateParts[1].toInt() - 1, // Mes
-                                dateParts[0].toInt(), // Día
-                                timeParts[0].toInt(), // Hora
-                                timeParts[1].toInt() // Minutos
+                                dateParts[2].toInt(),
+                                dateParts[1].toInt() - 1,
+                                dateParts[0].toInt(),
+                                timeParts[0].toInt(),
+                                timeParts[1].toInt()
                             )
                         }
                         val endTime = Calendar.getInstance().apply {
-                            timeInMillis = startTime.timeInMillis + 3600000 // Duración: 1 hora
+                            timeInMillis = startTime.timeInMillis + 3600000
                         }
 
                         putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.timeInMillis)
@@ -161,9 +133,10 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
                         }
                         addEventDirectlyToCalendar(
                             context,
-                            "Entrevista: " + job.value?.job.toString(),
+                            interview + job.value?.job.toString(),
                             interviewPlace.value,
-                            "Modalidad: " + interviewModal.value,
+                            modal + interviewModal.value + "\n" +
+                            interviewOrganizer + interviewOrganizer.value,
                             startTime.timeInMillis,
                             endTime.timeInMillis
                         )
@@ -171,7 +144,8 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
                 }
                 navController.navigate(Screen.MainView.route)
             }) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Agregar al calendario")
+                Icon(imageVector = Icons.Default.Add,
+                    contentDescription = stringResource(id = R.string.add_to_calendar))
             }
         }
     ) { paddingValues ->
@@ -182,32 +156,76 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text(text = "Fecha de la entrevista")
+            Text(text = stringResource(id = R.string.interview_date))
             Separation()
             Button(onClick = { datePickerDialog.show() }) {
-                Text(if (interviewDate.value.isEmpty()) "Seleccionar fecha" else interviewDate.value)
+                Text(if (interviewDate.value.isEmpty()) stringResource(id = R.string.select_date)
+                else interviewDate.value)
             }
             Separation()
 
-            Text(text = "Hora de la entrevista")
+            Text(text = stringResource(id = R.string.interview_hour))
             Separation()
             Button(onClick = { timePickerDialog.show() }) {
-                Text(if (interviewHour.value.isEmpty()) "Seleccionar hora" else interviewHour.value)
+                Text(if (interviewHour.value.isEmpty()) stringResource(id = R.string.select_hour)
+                else interviewHour.value)
             }
             Separation()
 
-            Text(text = "Lugar de la entrevista")
+            Text(text = stringResource(id = R.string.interview_place))
             Separation()
             OutlinedTextField(
                 value = interviewPlace.value,
                 onValueChange = { interviewPlace.value = it })
             Separation()
 
-            Text(text = "Modalidad")
+            Text(text = stringResource(id = R.string.interview_modal))
             Separation()
             OutlinedTextField(
                 value = interviewModal.value,
                 onValueChange = { interviewModal.value = it })
+            Separation()
+
+            Text(text = stringResource(id = R.string.interview_organizer))
+            Separation()
+            OutlinedTextField(
+                value = interviewOrganizer.value,
+                onValueChange = { interviewOrganizer.value = it })
         }
+    }
+}
+
+fun addEventDirectlyToCalendar(
+    context: Context,
+    title: String,
+    location: String,
+    description: String,
+    startTime: Long,
+    endTime: Long
+) {
+    val event = ContentValues().apply {
+        put(CalendarContract.Events.CALENDAR_ID, 1)
+        put(CalendarContract.Events.TITLE, title)
+        put(CalendarContract.Events.EVENT_LOCATION, location)
+        put(CalendarContract.Events.DESCRIPTION, description)
+        put(CalendarContract.Events.DTSTART, startTime)
+        put(CalendarContract.Events.DTEND, endTime)
+        put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().id)
+    }
+    if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR)
+        == PackageManager.PERMISSION_GRANTED
+    ) {
+        val uri = context.contentResolver.insert(CalendarContract.Events.CONTENT_URI, event)
+        if (uri != null) {
+            Toast.makeText(context, R.string.add_event, Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, R.string.error_event, Toast.LENGTH_SHORT).show()
+        }
+    } else {
+        ActivityCompat.requestPermissions(
+            (context as Activity),
+            arrayOf(Manifest.permission.WRITE_CALENDAR),
+            1
+        )
     }
 }

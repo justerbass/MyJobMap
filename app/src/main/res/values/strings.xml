@@ -1,8 +1,49 @@
 <resources>
     <string name="app_name">MyJobMap</string>
-    <string name="Splash">Splash Screen</string>
+<!--    screens -->
+    <string name="splash">Splash Screen</string>
     <string name="mainview">Trabajos Postulados</string>
     <string name="NewJob">Agregar Nueva Postulación</string>
     <string name="back">Regresar</string>
-    <string name="answer">Estado de la postulación</string>
+    <string name="answer">Estado de la Postulación</string>
+    <string name="recruiter">Portal de Trabajo</string>
+    <string name="postulation">Puesto Postulado</string>
+    <string name="company">Empresa</string>
+    <string name="description">Descripción del Puesto</string>
+    <string name="salary">Sueldo</string>
+    <string name="other">Otro Detalle</string>
+    <string name="date">Fecha de Postulación</string>
+    <string name="type_answer">Indique el Tipo de Respuesta Dada</string>
+    <string name="interview_date">Fecha de la Entrevista</string>
+    <string name="interview_hour">Hora de la Entrevista</string>
+    <string name="select_date">Seleccionar Fecha</string>
+    <string name="select_hour">Seleccionar Hora</string>
+    <string name="interview_place">Lugar de la Entrevista</string>
+    <string name="interview_modal">Modalidad de la Entrevista</string>
+    <string name="add_to_calendar">Agregar al Calendario</string>
+    <string name="add_event">Evento Agregado al Calendario</string>
+    <string name="error_event">Error al Agregar el Evento</string>
+    <string name="interview_organizer">Entrevistador</string>
+    <string name="modal">Modalidad</string>
+
+
+<!--    tipos de respuestas -->
+    <string name="question_answer">Respondieron a la Postulación</string>
+    <string name="no_answer">Sin Respuesta</string>
+    <string name="yes_answer">Respondido</string>
+    <string name="next_step">Avanza de Etapa</string>
+    <string name="call_it">Llamado a Entrevista</string>
+
+<!--    botones-->
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="interview">Entrevista</string>
+    <string name="desist">Proceso Desistido</string>
+    <string name="rejected">Rechazado</string>
+    <string name="next">Pasa a Siguiente Etapa</string>
+
+
+<!--    title top bar-->
+    <string name="answer_to">Respuesta a</string>
+    <string name="details_interview">Detalles de la Entrevista a</string>
 </resources>

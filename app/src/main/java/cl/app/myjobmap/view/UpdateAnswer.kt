@@ -15,7 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Separation
 import cl.app.myjobmap.naviagation.Screen
 import cl.app.myjobmap.viewModel.PostulationViewModel
@@ -30,7 +32,7 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "Respuesta a " + job.value?.job.toString())
+                    Text(text = stringResource(id = R.string.answer_to) + "\n" +  job.value?.job.toString())
                 }
             )
         }
@@ -42,28 +44,30 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Indique el tipo de respuesta dado")
+            Text(text = stringResource(id = R.string.type_answer))
             Separation()
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                val callItAnswer = stringResource(id = R.string.call_it)
+                val nextStepAnswer = stringResource(id = R.string.next_step)
                 Button(onClick = {
-                    job.value?.answer = "Llamado a Entrevista"
+                    job.value?.answer = callItAnswer
                     viewModel.updatePostulation(job.value!!)
                     navController.navigate(Screen.Interview.route)
                 }
                 ) {
-                    Text(text = "Entrevista")
+                    Text(text = stringResource(id = R.string.interview))
                 }
 
                 Button(onClick = {
-                    job.value?.answer = "Avanza de etapa"
+                    job.value?.answer = nextStepAnswer
                     viewModel.updatePostulation(job.value!!)
                     navController.navigate(Screen.MainView.route)
                 }) {
-                    Text(text = "Pasa a siguiente etapa")
+                    Text(text = stringResource(id = R.string.next))
                 }
             }
             Separation()
@@ -72,21 +76,23 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                val reject = stringResource(id = R.string.rejected)
+                val desist = stringResource(id = R.string.desist)
                 Button(onClick = {
-                    job.value?.answer = "Rechazado"
+                    job.value?.answer = reject
                     viewModel.updatePostulation(job.value!!)
                     navController.navigate(Screen.MainView.route)
                 }
                 ) {
-                    Text(text = "Rechazado")
+                    Text(text = reject)
                 }
 
                 Button(onClick = {
-                    job.value?.answer = "Proceso Desistido"
+                    job.value?.answer = desist
                     viewModel.updatePostulation(job.value!!)
                     navController.navigate(Screen.MainView.route)
                 }) {
-                    Text(text = "Proceso Desistido")
+                    Text(text = desist)
                 }
             }
             Separation()

@@ -45,6 +45,7 @@ fun NewJob(
     val salary = remember { mutableStateOf("")}
     val other = remember { mutableStateOf("")}
     val date = remember { mutableStateOf("")}
+    val answer = remember { mutableStateOf("")}
 
     Scaffold (
         topBar = {
@@ -75,7 +76,7 @@ fun NewJob(
                         jobDescription = description.value,
                         salary = salary.value,
                         recruiter = recruiter.value,
-                        answer = "Sin Respuesta"
+                        answer = answer.value
                     )
                     viewModel.insertPostulation(newPostulation)
                 }
@@ -94,40 +95,40 @@ fun NewJob(
             OutlinedTextField(
                 value = recruiter.value,
                 onValueChange = {recruiter.value = it},
-                label = { Text(text = "Recruiter") }
+                label = { Text(text = stringResource(id = R.string.recruiter)) }
             )
             Separation()
             OutlinedTextField(
                 value = postulation.value,
                 onValueChange = {postulation.value = it},
-                label = { Text(text = "Postulation") }
+                label = { Text(text = stringResource(id = R.string.postulation)) }
             )
             Separation()
             OutlinedTextField(
                 value = company.value,
                 onValueChange = {company.value = it},
-                label = { Text(text = "Company") }
+                label = { Text(text = stringResource(id = R.string.company)) }
             )
             Separation()
             OutlinedTextField(
                 value = description.value,
                 onValueChange = {description.value = it},
-                label = { Text(text = "Description") }
+                label = { Text(text = stringResource(id = R.string.description)) }
             )
             Separation()
             OutlinedTextField(
                 value = salary.value,
                 onValueChange = {salary.value = it},
-                label = { Text(text = "Salary") }
+                label = { Text(text = stringResource(id = R.string.salary)) }
             )
             Separation()
             OutlinedTextField(
                 value = other.value,
                 onValueChange = {other.value = it},
-                label = { Text(text = "Other") }
+                label = { Text(text = stringResource(id = R.string.other)) }
             )
             Separation()
-
+            answer.value = stringResource(id = R.string.no_answer)
         }
 
     }

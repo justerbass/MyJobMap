@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.naviagation.Screen
@@ -29,7 +30,7 @@ fun SplashScreen(navControler: NavController){
         contentAlignment = Alignment.Center
     ){
         Image(painter = painterResource(id = R.drawable.splash),
-            contentDescription = R.string.Splash.toString(),
+            contentDescription = stringResource(id = R.string.splash),
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )

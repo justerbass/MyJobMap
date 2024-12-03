@@ -61,40 +61,43 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                 val id = viewModel.listenID.value
                 val job = viewModel.getPostulationById(id).collectAsState(initial = null)
 
-                Text(text = "Portal Postulado")
+                Text(text = stringResource(id = R.string.recruiter))
 //                Separation()
                 Text(text = job.value?.recruiter.toString())
 //                Separation()
-                Text(text = "Puesto Postulado")
+                Text(text = stringResource(id = R.string.postulation))
 //                Separation()
                 Text(text = job.value?.job.toString())
 //                Separation()
-                Text(text = "Fecha de Postulacion")
+                Text(text = stringResource(id = R.string.date))
 //                Separation()
                 Text(text = job.value?.date.toString())
 //                Separation()
-                Text(text = "Respondieron a la postulacion")
+                Text(text = stringResource(id = R.string.question_answer))
 //                Separation()
                 Row (
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ){
+                    val negativeAnswer = stringResource(id = R.string.no_answer)
+                    val positiveAnswer = stringResource(id = R.string.yes_answer)
+
                     Button(onClick = {
-                        job.value?.answer = "Respondido"
+                        job.value?.answer = positiveAnswer
                         viewModel.updatePostulation(job.value!!)
                         navController.navigate(Screen.UpdateAnswer.route)
                     }
                     ) {
-                        Text(text = "si")
+                        Text(text = stringResource(id = R.string.yes))
                     }
 
                     Button(onClick = {
                         navController.navigate(Screen.MainView.route)
-                        job.value?.answer = "Sin Respuesta"
+                        job.value?.answer = negativeAnswer
                         viewModel.updatePostulation(job.value!!)
                     }) {
-                        Text(text = "no")
+                        Text(text = stringResource(id = R.string.no))
                     }
                 }
 //                Separation()
