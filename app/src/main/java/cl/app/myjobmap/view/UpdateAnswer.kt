@@ -16,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Separation
@@ -32,7 +33,8 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = stringResource(id = R.string.answer_to) + "\n" +  job.value?.job.toString())
+                    Text(text = stringResource(id = R.string.answer_to) + "\n" +  job.value?.job.toString(),
+                        textAlign = TextAlign.Center)
                 }
             )
         }

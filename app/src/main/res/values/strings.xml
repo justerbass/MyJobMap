@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MyJobMap</string>
-<!--    screens -->
+<!--    body screens -->
     <string name="splash">Splash Screen</string>
     <string name="mainview">Trabajos Postulados</string>
     <string name="NewJob">Agregar Nueva Postulación</string>
