@@ -14,6 +14,7 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,14 +39,16 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = stringResource(id = R.string.answer)
+                        text = stringResource(id = R.string.answer),
+                        color = MaterialTheme.colorScheme.primary
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(Screen.MainView.route) }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(id = R.string.back)
+                            contentDescription = stringResource(id = R.string.back),
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     }
                 }

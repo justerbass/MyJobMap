@@ -78,79 +78,87 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
                 title = {
                     Text(
                         text = stringResource(id = R.string.details_interview) + "\n" + job.value?.job.toString(),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                val intent = Intent(Intent.ACTION_EDIT).apply {
-                    data = CalendarContract.Events.CONTENT_URI
-                    putExtra(
-                        CalendarContract.Events.TITLE,
-                        interview + job.value?.job.toString()
-                    )
-                    putExtra(CalendarContract.Events.EVENT_LOCATION, interviewPlace.value)
-                    putExtra(
-                        CalendarContract.Events.DESCRIPTION,
-                        modal + interviewModal.value + "\n" +
-                                organizer + interviewOrganizer.value
-                    )
-
-                    val dateParts = interviewDate.value.split("-")
-                    val timeParts = interviewHour.value.split(":")
-                    if (dateParts.size == 3 && timeParts.size == 2) {
-                        val startTime = Calendar.getInstance().apply {
-                            set(
-                                dateParts[2].toInt(),
-                                dateParts[1].toInt() - 1,
-                                dateParts[0].toInt(),
-                                timeParts[0].toInt(),
-                                timeParts[1].toInt()
-                            )
-                        }
-                        val endTime = Calendar.getInstance().apply {
-                            timeInMillis = startTime.timeInMillis + 3600000
-                        }
-
-                        putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startTime.timeInMillis)
-                        putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.timeInMillis)
-                    }
-                }
-
-                if (intent.resolveActivity(context.packageManager) != null) {
-                    context.startActivity(intent)
-                } else {
-
-                    val dateParts = interviewDate.value.split("-")
-                    val timeParts = interviewHour.value.split(":")
-                    if (dateParts.size == 3 && timeParts.size == 2) {
-                        val startTime = Calendar.getInstance().apply {
-                            set(
-                                dateParts[2].toInt(),
-                                dateParts[1].toInt() - 1,
-                                dateParts[0].toInt(),
-                                timeParts[0].toInt(),
-                                timeParts[1].toInt()
-                            )
-                        }
-                        val endTime = Calendar.getInstance().apply {
-                            timeInMillis = startTime.timeInMillis + 3600000
-                        }
-                        addEventDirectlyToCalendar(
-                            context,
-                            interview + job.value?.job.toString(),
-                            interviewPlace.value,
-                            modal + interviewModal.value + "\n" +
-                                    interviewOrganizer + interviewOrganizer.value,
-                            startTime.timeInMillis,
-                            endTime.timeInMillis
+            FloatingActionButton(
+                onClick = {
+                    val intent = Intent(Intent.ACTION_EDIT).apply {
+                        data = CalendarContract.Events.CONTENT_URI
+                        putExtra(
+                            CalendarContract.Events.TITLE,
+                            interview + job.value?.job.toString()
                         )
+                        putExtra(CalendarContract.Events.EVENT_LOCATION, interviewPlace.value)
+                        putExtra(
+                            CalendarContract.Events.DESCRIPTION,
+                            modal + interviewModal.value + "\n" +
+                                    organizer + interviewOrganizer.value
+                        )
+
+                        val dateParts = interviewDate.value.split("-")
+                        val timeParts = interviewHour.value.split(":")
+                        if (dateParts.size == 3 && timeParts.size == 2) {
+                            val startTime = Calendar.getInstance().apply {
+                                set(
+                                    dateParts[2].toInt(),
+                                    dateParts[1].toInt() - 1,
+                                    dateParts[0].toInt(),
+                                    timeParts[0].toInt(),
+                                    timeParts[1].toInt()
+                                )
+                            }
+                            val endTime = Calendar.getInstance().apply {
+                                timeInMillis = startTime.timeInMillis + 3600000
+                            }
+
+                            putExtra(
+                                CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                                startTime.timeInMillis
+                            )
+                            putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.timeInMillis)
+                        }
                     }
-                }
-                navController.navigate(Screen.MainView.route)
-            }) {
+
+                    if (intent.resolveActivity(context.packageManager) != null) {
+                        context.startActivity(intent)
+                    } else {
+
+                        val dateParts = interviewDate.value.split("-")
+                        val timeParts = interviewHour.value.split(":")
+                        if (dateParts.size == 3 && timeParts.size == 2) {
+                            val startTime = Calendar.getInstance().apply {
+                                set(
+                                    dateParts[2].toInt(),
+                                    dateParts[1].toInt() - 1,
+                                    dateParts[0].toInt(),
+                                    timeParts[0].toInt(),
+                                    timeParts[1].toInt()
+                                )
+                            }
+                            val endTime = Calendar.getInstance().apply {
+                                timeInMillis = startTime.timeInMillis + 3600000
+                            }
+                            addEventDirectlyToCalendar(
+                                context,
+                                interview + job.value?.job.toString(),
+                                interviewPlace.value,
+                                modal + interviewModal.value + "\n" +
+                                        interviewOrganizer + interviewOrganizer.value,
+                                startTime.timeInMillis,
+                                endTime.timeInMillis
+                            )
+                        }
+                    }
+                    navController.navigate(Screen.MainView.route)
+                },
+                containerColor = MaterialTheme.colorScheme.secondary,
+                contentColor = MaterialTheme.colorScheme.onSecondary
+            ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = stringResource(id = R.string.add_to_calendar)
