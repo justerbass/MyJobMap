@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -55,7 +57,8 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = stringResource(id = R.string.type_answer))
+            Text(text = stringResource(id = R.string.type_answer),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             Separation()
             Separation()
@@ -71,7 +74,11 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
                         viewModel.updatePostulation(job.value!!)
                         navController.navigate(Screen.Interview.route)
                     },
-                    modifier = Modifier.fillMaxWidth(0.6F)
+                    modifier = Modifier.fillMaxWidth(0.6F),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.onBackground,
+                        contentColor = MaterialTheme.colorScheme.onSecondary
+                    )
                 ) {
                     Text(text = stringResource(id = R.string.interview),
                         modifier = Modifier.padding(vertical =  5.dp)
@@ -92,7 +99,11 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
                         viewModel.updatePostulation(job.value!!)
                         navController.navigate(Screen.MainView.route)
                     },
-                    modifier = Modifier.fillMaxWidth(0.6F)
+                    modifier = Modifier.fillMaxWidth(0.6F),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.onTertiary,
+                        contentColor = MaterialTheme.colorScheme.primary
+                    )
                 ) {
                     Text(text = stringResource(id = R.string.next),
                         modifier = Modifier.padding(vertical =  5.dp)
@@ -113,7 +124,11 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
                         viewModel.updatePostulation(job.value!!)
                         navController.navigate(Screen.MainView.route)
                     },
-                    modifier = Modifier.fillMaxWidth(0.6F)
+                    modifier = Modifier.fillMaxWidth(0.6F),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        contentColor = MaterialTheme.colorScheme.onSecondary
+                    )
                 ) {
                     Text(text = reject,
                         modifier = Modifier.padding(vertical =  5.dp)
@@ -134,7 +149,11 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
                         viewModel.updatePostulation(job.value!!)
                         navController.navigate(Screen.MainView.route)
                     },
-                    modifier = Modifier.fillMaxWidth(0.6F)
+                    modifier = Modifier.fillMaxWidth(0.6F),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.inversePrimary,
+                        contentColor = MaterialTheme.colorScheme.onSecondary
+                    )
                 ) {
                     Text(text = desist,
                         modifier = Modifier.padding(vertical =  5.dp)

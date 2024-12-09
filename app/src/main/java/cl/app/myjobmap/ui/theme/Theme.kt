@@ -18,7 +18,8 @@ private val DarkColorScheme = darkColorScheme(
     onSecondary = LightBeigeDark,
     background = WhiteDark,
     onBackground = NaturalGreenDark,
-    inversePrimary = ShinyOrangeDark
+    inversePrimary = ShinyOrangeDark,
+    onTertiary = VibrantYellowDark
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -29,7 +30,8 @@ private val LightColorScheme = lightColorScheme(
     onSecondary = LightBeige,
     background = White,
     onBackground = NaturalGreen,
-    inversePrimary = ShinyOrange
+    inversePrimary = ShinyOrange,
+    onTertiary = VibrantYellow
 )
 
 @Composable
