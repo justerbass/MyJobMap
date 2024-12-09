@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Separation
@@ -33,8 +34,10 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = stringResource(id = R.string.answer_to) + "\n" +  job.value?.job.toString(),
-                        textAlign = TextAlign.Center)
+                    Text(
+                        text = stringResource(id = R.string.answer_to) + "\n" + job.value?.job.toString(),
+                        textAlign = TextAlign.Center
+                    )
                 }
             )
         }
@@ -42,63 +45,99 @@ fun UpdateAnswer(navController: NavController, viewModel: PostulationViewModel) 
         Column(
             modifier = Modifier
                 .padding(paddingValues)
+                .padding(top = 100.dp)
                 .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = stringResource(id = R.string.type_answer))
             Separation()
+            Separation()
+            Separation()
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround,
+                modifier = Modifier.fillMaxWidth(0.9F),
+                horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val callItAnswer = stringResource(id = R.string.call_it)
-                val nextStepAnswer = stringResource(id = R.string.next_step)
-                Button(onClick = {
-                    job.value?.answer = callItAnswer
-                    viewModel.updatePostulation(job.value!!)
-                    navController.navigate(Screen.Interview.route)
-                }
+                Button(
+                    onClick = {
+                        job.value?.answer = callItAnswer
+                        viewModel.updatePostulation(job.value!!)
+                        navController.navigate(Screen.Interview.route)
+                    },
+                    modifier = Modifier.fillMaxWidth(0.6F)
                 ) {
-                    Text(text = stringResource(id = R.string.interview))
-                }
-
-                Button(onClick = {
-                    job.value?.answer = nextStepAnswer
-                    viewModel.updatePostulation(job.value!!)
-                    navController.navigate(Screen.MainView.route)
-                }) {
-                    Text(text = stringResource(id = R.string.next))
+                    Text(text = stringResource(id = R.string.interview),
+                        modifier = Modifier.padding(vertical =  5.dp)
+                    )
                 }
             }
             Separation()
+            Separation()
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(0.9F),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val nextStepAnswer = stringResource(id = R.string.next_step)
+                Button(
+                    onClick = {
+                        job.value?.answer = nextStepAnswer
+                        viewModel.updatePostulation(job.value!!)
+                        navController.navigate(Screen.MainView.route)
+                    },
+                    modifier = Modifier.fillMaxWidth(0.6F)
+                ) {
+                    Text(text = stringResource(id = R.string.next),
+                        modifier = Modifier.padding(vertical =  5.dp)
+                    )
+                }
+            }
+            Separation()
+            Separation()
+            Row(
+                modifier = Modifier.fillMaxWidth(0.9F),
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val reject = stringResource(id = R.string.rejected)
-                val desist = stringResource(id = R.string.desist)
-                Button(onClick = {
-                    job.value?.answer = reject
-                    viewModel.updatePostulation(job.value!!)
-                    navController.navigate(Screen.MainView.route)
-                }
+                Button(
+                    onClick = {
+                        job.value?.answer = reject
+                        viewModel.updatePostulation(job.value!!)
+                        navController.navigate(Screen.MainView.route)
+                    },
+                    modifier = Modifier.fillMaxWidth(0.6F)
                 ) {
-                    Text(text = reject)
-                }
-
-                Button(onClick = {
-                    job.value?.answer = desist
-                    viewModel.updatePostulation(job.value!!)
-                    navController.navigate(Screen.MainView.route)
-                }) {
-                    Text(text = desist)
+                    Text(text = reject,
+                        modifier = Modifier.padding(vertical =  5.dp)
+                    )
                 }
             }
             Separation()
-
+            Separation()
+            Row(
+                modifier = Modifier.fillMaxWidth(0.9F),
+                horizontalArrangement = Arrangement.SpaceAround,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val desist = stringResource(id = R.string.desist)
+                Button(
+                    onClick = {
+                        job.value?.answer = desist
+                        viewModel.updatePostulation(job.value!!)
+                        navController.navigate(Screen.MainView.route)
+                    },
+                    modifier = Modifier.fillMaxWidth(0.6F)
+                ) {
+                    Text(text = desist,
+                        modifier = Modifier.padding(vertical =  5.dp)
+                    )
+                }
+            }
+            Separation()
+            Separation()
         }
     }
 }

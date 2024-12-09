@@ -13,7 +13,7 @@
     <string name="salary">Sueldo</string>
     <string name="other">Otro Detalle</string>
     <string name="date">Fecha de Postulación</string>
-    <string name="type_answer">Indique el Tipo de Respuesta Dada</string>
+    <string name="type_answer">Indique el Tipo de Respuesta</string>
     <string name="interview_date">Fecha de la Entrevista</string>
     <string name="interview_hour">Hora de la Entrevista</string>
     <string name="select_date">Seleccionar Fecha</string>
