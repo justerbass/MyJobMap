@@ -55,7 +55,8 @@ fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = null)
             }
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
         Column(
             modifier = Modifier

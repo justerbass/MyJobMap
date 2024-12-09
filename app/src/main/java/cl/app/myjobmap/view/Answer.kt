@@ -1,5 +1,6 @@
 package cl.app.myjobmap.view
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Separation
@@ -53,38 +56,47 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     }
                 }
             )
-        }
+        },
+        containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(top = 100.dp)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
             val id = viewModel.listenID.value
             val job = viewModel.getPostulationById(id).collectAsState(initial = null)
 
-            Text(text = stringResource(id = R.string.company))
+            Text(text = stringResource(id = R.string.company),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             Separation()
-            Text(text = job.value?.company.toString())
+            Text(text = job.value?.company.toString(),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             Separation()
-            Text(text = stringResource(id = R.string.postulation))
+            Text(text = stringResource(id = R.string.postulation),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             Separation()
-            Text(text = job.value?.job.toString())
+            Text(text = job.value?.job.toString(),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             Separation()
-            Text(text = stringResource(id = R.string.date))
+            Text(text = stringResource(id = R.string.date),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             Separation()
-            Text(text = job.value?.date.toString())
+            Text(text = job.value?.date.toString(),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             Separation()
-            Text(text = stringResource(id = R.string.question_answer))
+            Text(text = stringResource(id = R.string.question_answer),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             Separation()
             Separation()
@@ -100,10 +112,15 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     job.value?.answer = positiveAnswer
                     viewModel.updatePostulation(job.value!!)
                     navController.navigate(Screen.UpdateAnswer.route)
-                }
+                },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.onBackground,
+                        contentColor = MaterialTheme.colorScheme.onSecondary
+                    )
                 ) {
                     Text(text = stringResource(id = R.string.yes).uppercase(),
-                        modifier = Modifier.padding(20.dp, 10.dp)
+                        modifier = Modifier.padding(20.dp, 10.dp),
+                        fontSize = 20.sp
                         )
                 }
 
@@ -111,9 +128,15 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     navController.navigate(Screen.MainView.route)
                     job.value?.answer = negativeAnswer
                     viewModel.updatePostulation(job.value!!)
-                }) {
+                },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        contentColor = MaterialTheme.colorScheme.onSecondary
+                    )
+                ) {
                     Text(text = stringResource(id = R.string.no).uppercase(),
-                        modifier = Modifier.padding(20.dp, 10.dp)
+                        modifier = Modifier.padding(20.dp, 10.dp),
+                        fontSize = 20.sp
                         )
                 }
             }
