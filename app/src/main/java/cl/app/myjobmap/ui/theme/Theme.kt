@@ -13,28 +13,30 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
     primary = FullBlueDark,
     secondary = GreenBlueDark,
-    tertiary = Pink80,
+    tertiary = RedDark,
     onPrimary = LightGreyDark,
     onSecondary = LightBeigeDark,
     background = WhiteDark,
-    onBackground = NaturalGreenDark
+    onBackground = NaturalGreenDark,
+    inversePrimary = ShinyOrangeDark
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = FullBlue,
     secondary = GreenBlue,
-    tertiary = Pink40,
+    tertiary = Red,
     onPrimary = LightGrey,
     onSecondary = LightBeige,
     background = White,
-    onBackground = NaturalGreen
+    onBackground = NaturalGreen,
+    inversePrimary = ShinyOrange
 )
 
 @Composable
 fun MyJobMapTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

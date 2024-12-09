@@ -21,6 +21,7 @@ val NaturalGreen = Color(0xFF6e9f68)
 val VibrantYellow = Color(0xFFf4b734)
 val ShinyOrange = Color(0xFFed7b4a)
 val White = Color(0xFFFFFFFF)
+val Red = Color(0xFFff0000)
 
 //Colors dark theme
 
@@ -32,3 +33,4 @@ val NaturalGreenDark = Color(0xFF5a7e57)
 val VibrantYellowDark = Color(0xFFd99a2c)
 val ShinyOrangeDark = Color(0xFFd26938)
 val WhiteDark = Color(0xFFcccccc)
+val RedDark = Color(0xFF3C0000)
