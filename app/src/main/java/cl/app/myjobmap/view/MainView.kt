@@ -40,7 +40,8 @@ fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = stringResource(id = R.string.mainview))
+                    Text(text = stringResource(id = R.string.mainview),
+                        color = MaterialTheme.colorScheme.primary)
                 }
             )
         },
@@ -48,7 +49,9 @@ fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
             FloatingActionButton(
                 onClick = {
                     navControler.navigate(Screen.NewJob.route)
-                }
+                },
+                containerColor = MaterialTheme.colorScheme.secondary,
+                contentColor = MaterialTheme.colorScheme.onSecondary
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = null)
             }
