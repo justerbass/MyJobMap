@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Button
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
@@ -98,7 +99,9 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     navController.navigate(Screen.UpdateAnswer.route)
                 }
                 ) {
-                    Text(text = stringResource(id = R.string.yes))
+                    Text(text = stringResource(id = R.string.yes).uppercase(),
+                        modifier = Modifier.padding(20.dp, 10.dp)
+                        )
                 }
 
                 Button(onClick = {
@@ -106,7 +109,9 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     job.value?.answer = negativeAnswer
                     viewModel.updatePostulation(job.value!!)
                 }) {
-                    Text(text = stringResource(id = R.string.no))
+                    Text(text = stringResource(id = R.string.no).uppercase(),
+                        modifier = Modifier.padding(20.dp, 10.dp)
+                        )
                 }
             }
         }
