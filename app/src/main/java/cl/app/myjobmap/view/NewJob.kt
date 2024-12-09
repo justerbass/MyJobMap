@@ -1,9 +1,13 @@
 package cl.app.myjobmap.view
 
+import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
@@ -21,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
@@ -37,23 +42,24 @@ import java.time.format.DateTimeFormatter
 fun NewJob(
     navControler: NavController,
     viewModel: PostulationViewModel
-){
-    val postulation = remember { mutableStateOf("")}
-    val company = remember { mutableStateOf("")}
-    val recruiter = remember { mutableStateOf("")}
-    val description = remember { mutableStateOf("")}
-    val salary = remember { mutableStateOf("")}
-    val other = remember { mutableStateOf("")}
-    val date = remember { mutableStateOf("")}
-    val answer = remember { mutableStateOf("")}
+) {
+    val postulation = remember { mutableStateOf("") }
+    val company = remember { mutableStateOf("") }
+    val recruiter = remember { mutableStateOf("") }
+    val description = remember { mutableStateOf("") }
+    val salary = remember { mutableStateOf("") }
+    val other = remember { mutableStateOf("") }
+    val date = remember { mutableStateOf("") }
+    val answer = remember { mutableStateOf("") }
 
-    Scaffold (
+    Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 navigationIcon = {
                     IconButton(onClick = { navControler.navigate(Screen.MainView.route) }
-                        ) {
-                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.back)
                         )
                     }
@@ -80,52 +86,62 @@ fun NewJob(
                     )
                     viewModel.insertPostulation(newPostulation)
                 }
-            ){
+            ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = null)
             }
         }
-    ){paddingValues ->
-        Column (
+    ) { paddingValues ->
+        Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
             OutlinedTextField(
                 value = recruiter.value,
-                onValueChange = {recruiter.value = it},
-                label = { Text(text = stringResource(id = R.string.recruiter)) }
+                onValueChange = { recruiter.value = it },
+                label = { Text(text = stringResource(id = R.string.recruiter)) },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(0.7F)
             )
             Separation()
             OutlinedTextField(
                 value = postulation.value,
-                onValueChange = {postulation.value = it},
-                label = { Text(text = stringResource(id = R.string.postulation)) }
+                onValueChange = { postulation.value = it },
+                label = { Text(text = stringResource(id = R.string.postulation)) },
+                modifier = Modifier.fillMaxWidth(0.7F)
             )
             Separation()
             OutlinedTextField(
                 value = company.value,
-                onValueChange = {company.value = it},
-                label = { Text(text = stringResource(id = R.string.company)) }
+                onValueChange = { company.value = it },
+                label = { Text(text = stringResource(id = R.string.company)) },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(0.7F)
             )
             Separation()
             OutlinedTextField(
                 value = description.value,
-                onValueChange = {description.value = it},
-                label = { Text(text = stringResource(id = R.string.description)) }
+                onValueChange = { description.value = it },
+                label = { Text(text = stringResource(id = R.string.description)) },
+                modifier = Modifier.fillMaxWidth(0.7F)
             )
             Separation()
             OutlinedTextField(
                 value = salary.value,
-                onValueChange = {salary.value = it},
-                label = { Text(text = stringResource(id = R.string.salary)) }
+                onValueChange = { salary.value = it },
+                label = { Text(text = stringResource(id = R.string.salary)) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(0.7F)
             )
             Separation()
             OutlinedTextField(
                 value = other.value,
-                onValueChange = {other.value = it},
-                label = { Text(text = stringResource(id = R.string.other)) }
+                onValueChange = { other.value = it },
+                label = { Text(text = stringResource(id = R.string.other)) },
+                modifier = Modifier.fillMaxWidth(0.7F)
             )
             Separation()
             answer.value = stringResource(id = R.string.no_answer)
