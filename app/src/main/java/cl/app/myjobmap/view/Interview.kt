@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
@@ -177,33 +178,47 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text(text = stringResource(id = R.string.interview_date))
+            Text(text = stringResource(id = R.string.interview_date),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
 
-            Button(onClick = { datePickerDialog.show() }) {
+            Button(onClick = { datePickerDialog.show() },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.inversePrimary,
+                    contentColor = MaterialTheme.colorScheme.onSecondary
+                )
+                ) {
                 Text(
                     if (interviewDate.value.isEmpty()) stringResource(id = R.string.select_date)
                     else interviewDate.value,
-                    modifier = Modifier.padding(vertical = 5.dp)
+                    modifier = Modifier.padding(vertical = 5.dp),
+                    fontSize = 16.sp
                 )
             }
 
             Separation()
 
-            Text(text = stringResource(id = R.string.interview_hour))
+            Text(text = stringResource(id = R.string.interview_hour),
+                color = MaterialTheme.colorScheme.primary)
 
             Separation()
 
-            Button(onClick = { timePickerDialog.show() }) {
+            Button(onClick = { timePickerDialog.show() },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.inversePrimary,
+                    contentColor = MaterialTheme.colorScheme.onSecondary
+                )) {
                 Text(
                     if (interviewHour.value.isEmpty()) stringResource(id = R.string.select_hour)
                     else interviewHour.value,
-                    modifier = Modifier.padding(vertical = 5.dp)
+                    modifier = Modifier.padding(vertical = 5.dp),
+                    fontSize = 16.sp
                 )
             }
             Separation()
 
-            Text(text = stringResource(id = R.string.interview_place))
+            Text(text = stringResource(id = R.string.interview_place),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             OutlinedTextField(
                 value = interviewPlace.value,
@@ -212,7 +227,8 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
             )
             Separation()
 
-            Text(text = stringResource(id = R.string.interview_modal))
+            Text(text = stringResource(id = R.string.interview_modal),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             OutlinedTextField(
                 value = interviewModal.value,
@@ -221,7 +237,8 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
             )
             Separation()
 
-            Text(text = stringResource(id = R.string.interview_organizer))
+            Text(text = stringResource(id = R.string.interview_organizer),
+                color = MaterialTheme.colorScheme.primary)
             Separation()
             OutlinedTextField(
                 value = interviewOrganizer.value,
