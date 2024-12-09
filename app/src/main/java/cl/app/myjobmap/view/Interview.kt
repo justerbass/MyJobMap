@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -22,6 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
@@ -73,7 +76,10 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = stringResource(id = R.string.details_interview) + "\n" + job.value?.job.toString())
+                    Text(
+                        text = stringResource(id = R.string.details_interview) + "\n" + job.value?.job.toString(),
+                        textAlign = TextAlign.Center
+                    )
                 }
             )
         },
@@ -89,7 +95,8 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
                     putExtra(
                         CalendarContract.Events.DESCRIPTION,
                         modal + interviewModal.value + "\n" +
-                        interviewOrganizer + interviewOrganizer.value)
+                                organizer + interviewOrganizer.value
+                    )
 
                     val dateParts = interviewDate.value.split("-")
                     val timeParts = interviewHour.value.split(":")
@@ -136,7 +143,7 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
                             interview + job.value?.job.toString(),
                             interviewPlace.value,
                             modal + interviewModal.value + "\n" +
-                            interviewOrganizer + interviewOrganizer.value,
+                                    interviewOrganizer + interviewOrganizer.value,
                             startTime.timeInMillis,
                             endTime.timeInMillis
                         )
@@ -144,31 +151,44 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
                 }
                 navController.navigate(Screen.MainView.route)
             }) {
-                Icon(imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(id = R.string.add_to_calendar))
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = stringResource(id = R.string.add_to_calendar)
+                )
             }
         }
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
+                .padding(top = 75.dp)
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
             Text(text = stringResource(id = R.string.interview_date))
             Separation()
+
             Button(onClick = { datePickerDialog.show() }) {
-                Text(if (interviewDate.value.isEmpty()) stringResource(id = R.string.select_date)
-                else interviewDate.value)
+                Text(
+                    if (interviewDate.value.isEmpty()) stringResource(id = R.string.select_date)
+                    else interviewDate.value,
+                    modifier = Modifier.padding(vertical = 5.dp)
+                )
             }
+
             Separation()
 
             Text(text = stringResource(id = R.string.interview_hour))
+
             Separation()
+
             Button(onClick = { timePickerDialog.show() }) {
-                Text(if (interviewHour.value.isEmpty()) stringResource(id = R.string.select_hour)
-                else interviewHour.value)
+                Text(
+                    if (interviewHour.value.isEmpty()) stringResource(id = R.string.select_hour)
+                    else interviewHour.value,
+                    modifier = Modifier.padding(vertical = 5.dp)
+                )
             }
             Separation()
 
@@ -176,21 +196,27 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
             Separation()
             OutlinedTextField(
                 value = interviewPlace.value,
-                onValueChange = { interviewPlace.value = it })
+                onValueChange = { interviewPlace.value = it },
+                modifier = Modifier.fillMaxWidth(0.7F)
+            )
             Separation()
 
             Text(text = stringResource(id = R.string.interview_modal))
             Separation()
             OutlinedTextField(
                 value = interviewModal.value,
-                onValueChange = { interviewModal.value = it })
+                onValueChange = { interviewModal.value = it },
+                modifier = Modifier.fillMaxWidth(0.7F)
+            )
             Separation()
 
             Text(text = stringResource(id = R.string.interview_organizer))
             Separation()
             OutlinedTextField(
                 value = interviewOrganizer.value,
-                onValueChange = { interviewOrganizer.value = it })
+                onValueChange = { interviewOrganizer.value = it },
+                modifier = Modifier.fillMaxWidth(0.7F)
+            )
         }
     }
 }
