@@ -16,6 +16,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -42,7 +43,10 @@ fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
                 title = {
                     Text(text = stringResource(id = R.string.mainview),
                         color = MaterialTheme.colorScheme.primary)
-                }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
             )
         },
         floatingActionButton = {
@@ -56,7 +60,7 @@ fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = null)
             }
         },
-        containerColor = MaterialTheme.colorScheme.background
+
     ) { paddingValues ->
         Column(
             modifier = Modifier

@@ -16,12 +16,12 @@ val Red = Color(0xFFff0000)
 
 //Colors dark theme
 
-val FullBlueDark = Color(0xFF253241)
+val FullBlueDark = Color(0xFFcccccc)
 val GreenBlueDark = Color(0xFF4eabb0)
 val LightGreyDark = Color(0xFF8a9aa2)
 val LightBeigeDark = Color(0xFFaaa598)
-val NaturalGreenDark = Color(0xFF5a7e57)
-val VibrantYellowDark = Color(0xFFd99a2c)
-val ShinyOrangeDark = Color(0xFFd26938)
-val WhiteDark = Color(0xFFcccccc)
+val NaturalGreenDark = Color(0xFF2B3D29)
+val VibrantYellowDark = Color(0xFF7C5818)
+val ShinyOrangeDark = Color(0xFF7A3C1E)
+val WhiteDark = Color(0xFF000000)
 val RedDark = Color(0xFF3C0000)

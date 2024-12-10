@@ -21,6 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -70,7 +71,10 @@ fun NewJob(
                 title = {
                     Text(text = stringResource(id = R.string.NewJob),
                         color = MaterialTheme.colorScheme.primary)
-                }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
             )
         },
         floatingActionButton = {
@@ -96,7 +100,7 @@ fun NewJob(
                 Icon(imageVector = Icons.Default.Add, contentDescription = null)
             }
         },
-        containerColor = MaterialTheme.colorScheme.background
+
     ) { paddingValues ->
         Column(
             modifier = Modifier

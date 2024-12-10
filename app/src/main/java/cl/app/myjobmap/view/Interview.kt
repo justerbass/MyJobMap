@@ -83,7 +83,10 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.primary
                     )
-                }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
             )
         },
         floatingActionButton = {
