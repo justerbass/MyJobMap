@@ -11,7 +11,7 @@ val LightBeige = Color(0xFFe5dbd0)
 val NaturalGreen = Color(0xFF6e9f68)
 val VibrantYellow = Color(0xFFf4b734)
 val ShinyOrange = Color(0xFFed7b4a)
-val White = Color(0xFFFFFFFF)
+val White = Color(0xFFcccccc)
 val Red = Color(0xFFff0000)
 
 //Colors dark theme

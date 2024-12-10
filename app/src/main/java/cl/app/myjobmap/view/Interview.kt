@@ -12,10 +12,13 @@ import android.provider.CalendarContract
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
@@ -33,6 +36,7 @@ import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Separation
 import cl.app.myjobmap.naviagation.Screen
+import cl.app.myjobmap.ui.theme.Red
 import cl.app.myjobmap.viewModel.PostulationViewModel
 import java.util.*
 
@@ -172,7 +176,7 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(top = 75.dp)
@@ -181,73 +185,111 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text(text = stringResource(id = R.string.interview_date),
-                color = MaterialTheme.colorScheme.primary)
-            Separation()
-
-            Button(onClick = { datePickerDialog.show() },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.inversePrimary,
-                    contentColor = MaterialTheme.colorScheme.onSecondary
+            item {
+                Text(
+                    text = stringResource(id = R.string.interview_date),
+                    color = MaterialTheme.colorScheme.primary
                 )
+                Separation()
+                Button(
+                    onClick = {
+                        if (ContextCompat.checkSelfPermission(
+                                context,
+                                Manifest.permission.WRITE_CALENDAR
+                            ) == PackageManager.PERMISSION_GRANTED
+                        ) {
+                            datePickerDialog.show()
+                        } else {
+                            ActivityCompat.requestPermissions(
+                                context as Activity,
+                                arrayOf(Manifest.permission.WRITE_CALENDAR),
+                                1
+                            )
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.inversePrimary,
+                        contentColor = MaterialTheme.colorScheme.onSecondary
+                    )
                 ) {
+                    Text(
+                        if (interviewDate.value.isEmpty()) stringResource(id = R.string.select_date)
+                        else interviewDate.value,
+                        modifier = Modifier.padding(vertical = 5.dp),
+                        fontSize = 16.sp
+                    )
+                }
+                Separation()
+            }
+            item {
                 Text(
-                    if (interviewDate.value.isEmpty()) stringResource(id = R.string.select_date)
-                    else interviewDate.value,
-                    modifier = Modifier.padding(vertical = 5.dp),
-                    fontSize = 16.sp
+                    text = stringResource(id = R.string.interview_hour),
+                    color = MaterialTheme.colorScheme.primary
+                )
+
+                Separation()
+
+                Button(
+                    onClick = { timePickerDialog.show() },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.inversePrimary,
+                        contentColor = MaterialTheme.colorScheme.onSecondary
+                    )
+                ) {
+                    Text(
+                        if (interviewHour.value.isEmpty()) stringResource(id = R.string.select_hour)
+                        else interviewHour.value,
+                        modifier = Modifier.padding(vertical = 5.dp),
+                        fontSize = 16.sp
+                    )
+                }
+                Separation()
+            }
+            item {
+                Text(
+                    text = stringResource(id = R.string.interview_place),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                OutlinedTextField(
+                    value = interviewPlace.value,
+                    onValueChange = { interviewPlace.value = it },
+                    modifier = Modifier.fillMaxWidth(0.7F)
+                )
+                Separation()
+            }
+            item {
+                Text(
+                    text = stringResource(id = R.string.interview_modal),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                OutlinedTextField(
+                    value = interviewModal.value,
+                    onValueChange = { interviewModal.value = it },
+                    modifier = Modifier.fillMaxWidth(0.7F)
+                )
+                Separation()
+            }
+            item {
+                Text(
+                    text = stringResource(id = R.string.interview_organizer),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                OutlinedTextField(
+                    value = interviewOrganizer.value,
+                    onValueChange = { interviewOrganizer.value = it },
+                    modifier = Modifier.fillMaxWidth(0.7F)
                 )
             }
-
-            Separation()
-
-            Text(text = stringResource(id = R.string.interview_hour),
-                color = MaterialTheme.colorScheme.primary)
-
-            Separation()
-
-            Button(onClick = { timePickerDialog.show() },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.inversePrimary,
-                    contentColor = MaterialTheme.colorScheme.onSecondary
-                )) {
-                Text(
-                    if (interviewHour.value.isEmpty()) stringResource(id = R.string.select_hour)
-                    else interviewHour.value,
-                    modifier = Modifier.padding(vertical = 5.dp),
-                    fontSize = 16.sp
+            item{
+                Separation()
+                Box(modifier = Modifier
+                    .size(300.dp)
                 )
+                Separation()
             }
-            Separation()
-
-            Text(text = stringResource(id = R.string.interview_place),
-                color = MaterialTheme.colorScheme.primary)
-            Separation()
-            OutlinedTextField(
-                value = interviewPlace.value,
-                onValueChange = { interviewPlace.value = it },
-                modifier = Modifier.fillMaxWidth(0.7F)
-            )
-            Separation()
-
-            Text(text = stringResource(id = R.string.interview_modal),
-                color = MaterialTheme.colorScheme.primary)
-            Separation()
-            OutlinedTextField(
-                value = interviewModal.value,
-                onValueChange = { interviewModal.value = it },
-                modifier = Modifier.fillMaxWidth(0.7F)
-            )
-            Separation()
-
-            Text(text = stringResource(id = R.string.interview_organizer),
-                color = MaterialTheme.colorScheme.primary)
-            Separation()
-            OutlinedTextField(
-                value = interviewOrganizer.value,
-                onValueChange = { interviewOrganizer.value = it },
-                modifier = Modifier.fillMaxWidth(0.7F)
-            )
         }
     }
 }

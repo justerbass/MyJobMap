@@ -3,11 +3,13 @@ package cl.app.myjobmap.view
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -30,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Separation
@@ -69,8 +72,10 @@ fun NewJob(
                     }
                 },
                 title = {
-                    Text(text = stringResource(id = R.string.NewJob),
-                        color = MaterialTheme.colorScheme.primary)
+                    Text(
+                        text = stringResource(id = R.string.NewJob),
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
@@ -101,8 +106,8 @@ fun NewJob(
             }
         },
 
-    ) { paddingValues ->
-        Column(
+        ) { paddingValues ->
+        LazyColumn(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
@@ -110,54 +115,73 @@ fun NewJob(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            OutlinedTextField(
-                value = recruiter.value,
-                onValueChange = { recruiter.value = it },
-                label = { Text(text = stringResource(id = R.string.recruiter)) },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(0.7F)
-            )
-            Separation()
-            OutlinedTextField(
-                value = postulation.value,
-                onValueChange = { postulation.value = it },
-                label = { Text(text = stringResource(id = R.string.postulation)) },
-                modifier = Modifier.fillMaxWidth(0.7F)
-            )
-            Separation()
-            OutlinedTextField(
-                value = company.value,
-                onValueChange = { company.value = it },
-                label = { Text(text = stringResource(id = R.string.company)) },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(0.7F)
-            )
-            Separation()
-            OutlinedTextField(
-                value = description.value,
-                onValueChange = { description.value = it },
-                label = { Text(text = stringResource(id = R.string.description)) },
-                modifier = Modifier.fillMaxWidth(0.7F)
-            )
-            Separation()
-            OutlinedTextField(
-                value = salary.value,
-                onValueChange = { salary.value = it },
-                label = { Text(text = stringResource(id = R.string.salary)) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(0.7F)
-            )
-            Separation()
-            OutlinedTextField(
-                value = other.value,
-                onValueChange = { other.value = it },
-                label = { Text(text = stringResource(id = R.string.other)) },
-                modifier = Modifier.fillMaxWidth(0.7F)
-            )
-            Separation()
-            answer.value = stringResource(id = R.string.no_answer)
+            item {
+                OutlinedTextField(
+                    value = recruiter.value,
+                    onValueChange = { recruiter.value = it },
+                    label = { Text(text = stringResource(id = R.string.recruiter)) },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(0.7F)
+                )
+                Separation()
+            }
+            item {
+                OutlinedTextField(
+                    value = postulation.value,
+                    onValueChange = { postulation.value = it },
+                    label = { Text(text = stringResource(id = R.string.postulation)) },
+                    modifier = Modifier.fillMaxWidth(0.7F)
+                )
+                Separation()
+            }
+            item {
+                OutlinedTextField(
+                    value = company.value,
+                    onValueChange = { company.value = it },
+                    label = { Text(text = stringResource(id = R.string.company)) },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(0.7F)
+                )
+                Separation()
+            }
+            item {
+                OutlinedTextField(
+                    value = description.value,
+                    onValueChange = { description.value = it },
+                    label = { Text(text = stringResource(id = R.string.description)) },
+                    modifier = Modifier.fillMaxWidth(0.7F)
+                )
+                Separation()
+            }
+            item {
+                OutlinedTextField(
+                    value = salary.value,
+                    onValueChange = { salary.value = it },
+                    label = { Text(text = stringResource(id = R.string.salary)) },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(0.7F)
+                )
+                Separation()
+            }
+            item {
+                OutlinedTextField(
+                    value = other.value,
+                    onValueChange = { other.value = it },
+                    label = { Text(text = stringResource(id = R.string.other)) },
+                    modifier = Modifier.fillMaxWidth(0.7F)
+                )
+                Separation()
+                answer.value = stringResource(id = R.string.no_answer)
+            }
+            item {
+                Separation()
+                Box(
+                    modifier = Modifier
+                        .size(300.dp)
+                )
+                Separation()
+            }
         }
-
     }
 }
