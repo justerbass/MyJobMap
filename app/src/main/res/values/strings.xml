@@ -46,4 +46,10 @@
 <!--    title top bar-->
     <string name="answer_to">Respuesta a</string>
     <string name="details_interview">Detalles de la Entrevista a</string>
+    
+<!--    Alert dialog-->
+    <string name="empty_job">Faltan Datos</string>
+    <string name="mesage_empty_job">Ingrese al menos el trabajo postulado</string>
+    <string name="accept">Aceptar</string>
+    <string name="reject">Rechazar</string>
 </resources>

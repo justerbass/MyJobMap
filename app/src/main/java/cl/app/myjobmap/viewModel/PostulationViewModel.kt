@@ -1,5 +1,6 @@
 package cl.app.myjobmap.viewModel
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -38,5 +39,9 @@ class PostulationViewModel @Inject constructor(private val postulationRepository
 
 //    edit answer
     var listenID : MutableStateFlow<Int> = MutableStateFlow(0)
+
+//    alert modal
+    private var _alert = mutableStateOf(false)
+    var alert: MutableState<Boolean> = _alert
 
 }

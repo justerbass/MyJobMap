@@ -1,10 +1,8 @@
 package cl.app.myjobmap.view
 
-import androidx.annotation.FloatRange
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,10 +29,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
+import cl.app.myjobmap.components.Alert
 import cl.app.myjobmap.components.Separation
 import cl.app.myjobmap.model.Postulation
 import cl.app.myjobmap.naviagation.Screen
@@ -85,19 +83,25 @@ fun NewJob(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navControler.navigate(Screen.MainView.route)
-                    date.value = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                    if (postulation.value.isBlank()) {
+                        viewModel.alert.value = true
+                    } else {
+                        navControler.navigate(Screen.MainView.route)
+                        date.value =
+                            LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 
-                    val newPostulation = Postulation(
-                        job = postulation.value,
-                        company = company.value,
-                        date = date.value,
-                        jobDescription = description.value,
-                        salary = salary.value,
-                        recruiter = recruiter.value,
-                        answer = answer.value
-                    )
-                    viewModel.insertPostulation(newPostulation)
+                        val newPostulation = Postulation(
+                            job = postulation.value,
+                            company = company.value,
+                            date = date.value,
+                            jobDescription = description.value,
+                            salary = salary.value,
+                            recruiter = recruiter.value,
+                            answer = answer.value
+                        )
+                        viewModel.insertPostulation(newPostulation)
+                    }
+
                 },
                 containerColor = MaterialTheme.colorScheme.secondary,
                 contentColor = MaterialTheme.colorScheme.onSecondary
@@ -183,5 +187,19 @@ fun NewJob(
                 Separation()
             }
         }
+    }
+    ShowAlert(viewModel)
+}
+
+@Composable
+fun ShowAlert(viewModel: PostulationViewModel){
+    if (viewModel.alert.value){
+        Alert(
+            title = stringResource(id = R.string.empty_job),
+            msg = stringResource(id = R.string.mesage_empty_job),
+            confirmText = stringResource(id = R.string.accept),
+            onDismissClick = { viewModel.alert.value = false },
+            onConfirmClick = { viewModel.alert.value = false }
+        )
     }
 }

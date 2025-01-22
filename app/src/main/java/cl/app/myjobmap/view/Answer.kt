@@ -10,12 +10,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -60,6 +64,22 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                     containerColor = MaterialTheme.colorScheme.background
                 )
             )
+
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = {
+
+                },
+
+                containerColor = MaterialTheme.colorScheme.tertiary,
+                contentColor = MaterialTheme.colorScheme.onSecondary
+
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete, contentDescription = null,
+                )
+            }
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
@@ -67,6 +87,7 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(top = 100.dp)
+                .padding(horizontal = 30.dp)
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -75,32 +96,47 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
             val id = viewModel.listenID.value
             val job = viewModel.getPostulationById(id).collectAsState(initial = null)
 
-            Text(text = stringResource(id = R.string.company),
-                color = MaterialTheme.colorScheme.primary)
+
+            Text(
+                text = stringResource(id = R.string.company),
+                color = MaterialTheme.colorScheme.primary
+            )
             Separation()
             Separation()
-            Text(text = job.value?.company.toString(),
-                color = MaterialTheme.colorScheme.primary)
+            Text(
+                text = job.value?.company.toString(),
+                color = MaterialTheme.colorScheme.primary
+            )
             Separation()
             Separation()
-            Text(text = stringResource(id = R.string.postulation),
-                color = MaterialTheme.colorScheme.primary)
+            Text(
+                text = stringResource(id = R.string.postulation),
+                color = MaterialTheme.colorScheme.primary
+            )
             Separation()
             Separation()
-            Text(text = job.value?.job.toString(),
-                color = MaterialTheme.colorScheme.primary)
+            Text(
+                text = job.value?.job.toString(),
+                color = MaterialTheme.colorScheme.primary
+            )
             Separation()
             Separation()
-            Text(text = stringResource(id = R.string.date),
-                color = MaterialTheme.colorScheme.primary)
+            Text(
+                text = stringResource(id = R.string.date),
+                color = MaterialTheme.colorScheme.primary
+            )
             Separation()
             Separation()
-            Text(text = job.value?.date.toString(),
-                color = MaterialTheme.colorScheme.primary)
+            Text(
+                text = job.value?.date.toString(),
+                color = MaterialTheme.colorScheme.primary
+            )
             Separation()
             Separation()
-            Text(text = stringResource(id = R.string.question_answer),
-                color = MaterialTheme.colorScheme.primary)
+            Text(
+                text = stringResource(id = R.string.question_answer),
+                color = MaterialTheme.colorScheme.primary
+            )
             Separation()
             Separation()
             Separation()
@@ -112,36 +148,40 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                 val negativeAnswer = stringResource(id = R.string.no_answer)
                 val positiveAnswer = stringResource(id = R.string.yes_answer)
 
-                Button(onClick = {
-                    job.value?.answer = positiveAnswer
-                    viewModel.updatePostulation(job.value!!)
-                    navController.navigate(Screen.UpdateAnswer.route)
-                },
+                Button(
+                    onClick = {
+                        job.value?.answer = positiveAnswer
+                        viewModel.updatePostulation(job.value!!)
+                        navController.navigate(Screen.UpdateAnswer.route)
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.onBackground,
                         contentColor = MaterialTheme.colorScheme.onSecondary
                     )
                 ) {
-                    Text(text = stringResource(id = R.string.yes).uppercase(),
+                    Text(
+                        text = stringResource(id = R.string.yes).uppercase(),
                         modifier = Modifier.padding(20.dp, 10.dp),
                         fontSize = 20.sp
-                        )
+                    )
                 }
 
-                Button(onClick = {
-                    navController.navigate(Screen.MainView.route)
-                    job.value?.answer = negativeAnswer
-                    viewModel.updatePostulation(job.value!!)
-                },
+                Button(
+                    onClick = {
+                        navController.navigate(Screen.MainView.route)
+                        job.value?.answer = negativeAnswer
+                        viewModel.updatePostulation(job.value!!)
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.tertiary,
                         contentColor = MaterialTheme.colorScheme.onSecondary
                     )
                 ) {
-                    Text(text = stringResource(id = R.string.no).uppercase(),
+                    Text(
+                        text = stringResource(id = R.string.no).uppercase(),
                         modifier = Modifier.padding(20.dp, 10.dp),
                         fontSize = 20.sp
-                        )
+                    )
                 }
             }
         }
