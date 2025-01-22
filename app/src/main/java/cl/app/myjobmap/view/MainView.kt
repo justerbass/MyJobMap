@@ -110,7 +110,7 @@ fun ShowJobs(
             JobCard(
                 jobTitle = job.job,
                 companyName = job.company,
-                recruiterName = job.recruiter,
+                recruiterName = job.salary,
                 date = job.date,
                 answer = job.answer,
                 onClick = {
