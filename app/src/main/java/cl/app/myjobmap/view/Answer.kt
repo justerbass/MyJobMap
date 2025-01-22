@@ -2,7 +2,6 @@ package cl.app.myjobmap.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -19,29 +17,31 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role.Companion.Button
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
+import cl.app.myjobmap.components.Alert
 import cl.app.myjobmap.components.Separation
+import cl.app.myjobmap.model.Postulation
 import cl.app.myjobmap.naviagation.Screen
 import cl.app.myjobmap.viewModel.PostulationViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Answer(navController: NavController, viewModel: PostulationViewModel) {
+    val id = viewModel.listenID.value
+    val job = viewModel.getPostulationById(id).collectAsState(initial = null)
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -69,7 +69,7 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-
+                    viewModel.alert.value = true
                 },
 
                 containerColor = MaterialTheme.colorScheme.tertiary,
@@ -93,9 +93,6 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            val id = viewModel.listenID.value
-            val job = viewModel.getPostulationById(id).collectAsState(initial = null)
-
 
             Text(
                 text = stringResource(id = R.string.company),
@@ -185,5 +182,26 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
                 }
             }
         }
+    }
+    ShowDelete(viewModel, navController, job)
+}
+
+@Composable
+fun ShowDelete(viewModel: PostulationViewModel, navController: NavController, job: State<Postulation?>) {
+
+
+    if (viewModel.alert.value) {
+        Alert(
+            title = stringResource(id = R.string.delete_job),
+            msg = stringResource(id = R.string.message_delete),
+            confirmText = stringResource(id = R.string.accept),
+            onDismissClick = { viewModel.alert.value = false },
+            onConfirmClick = {
+                viewModel.alert.value = false
+                viewModel.deletePostulation(job.value!!)
+                navController.navigate(Screen.MainView.route)
+            }
+        )
+
     }
 }

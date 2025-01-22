@@ -196,7 +196,7 @@ fun ShowAlert(viewModel: PostulationViewModel){
     if (viewModel.alert.value){
         Alert(
             title = stringResource(id = R.string.empty_job),
-            msg = stringResource(id = R.string.mesage_empty_job),
+            msg = stringResource(id = R.string.message_empty_job),
             confirmText = stringResource(id = R.string.accept),
             onDismissClick = { viewModel.alert.value = false },
             onConfirmClick = { viewModel.alert.value = false }

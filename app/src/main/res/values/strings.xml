@@ -49,7 +49,9 @@
     
 <!--    Alert dialog-->
     <string name="empty_job">Faltan Datos</string>
-    <string name="mesage_empty_job">Ingrese al menos el trabajo postulado</string>
+    <string name="message_empty_job">Ingrese al menos el trabajo postulado</string>
     <string name="accept">Aceptar</string>
     <string name="reject">Rechazar</string>
+    <string name="delete_job">Borrar Postulación</string>
+    <string name="message_delete">¿Estas seguro de borrar la postulación?</string>
 </resources>
