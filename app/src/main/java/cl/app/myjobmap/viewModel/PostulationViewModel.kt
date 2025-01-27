@@ -45,4 +45,6 @@ class PostulationViewModel @Inject constructor(private val postulationRepository
     private var _alert = mutableStateOf(false)
     var alert: MutableState<Boolean> = _alert
 
+
+
 }
