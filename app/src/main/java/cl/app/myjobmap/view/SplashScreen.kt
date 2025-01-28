@@ -10,18 +10,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.naviagation.Screen
+import cl.app.myjobmap.viewModel.PhrasesViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navControler: NavController){
+fun SplashScreen(navControler: NavController, viewModel: PhrasesViewModel){
 
     LaunchedEffect(key1 = true){
         delay(3000)
         navControler.navigate(Screen.MainView.route)
 
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.getAllApi()
     }
 
     Box(
