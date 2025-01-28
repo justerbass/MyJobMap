@@ -74,29 +74,32 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //room
+    //  room
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
 
-    //navegacion
+    //  navegacion
     implementation("androidx.navigation:navigation-compose:2.8.4")
     implementation("androidx.compose.ui:ui:1.7.5")
 
-    //gson
+    //  gson
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
-    //    retrofit
+    //  retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
 
 
-    // Coil
+    //  Coil
     implementation("io.coil-kt:coil-compose:2.7.0")
 
-    // Hilt
+    //  Hilt
     implementation("com.google.dagger:hilt-android:2.51.1")
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    //    admob
+    implementation("com.google.android.gms:play-services-ads-lite:21.4.0")
 
 //    KSP por si acaso
 //    annotationProcessor(libs.room.compiler)

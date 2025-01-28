@@ -25,6 +25,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -34,9 +35,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
+import cl.app.myjobmap.components.BannerAd
 import cl.app.myjobmap.components.Separation
 import cl.app.myjobmap.naviagation.Screen
 import cl.app.myjobmap.ui.theme.Red
+import cl.app.myjobmap.util.Constants.Companion.ad_id_banner
 import cl.app.myjobmap.viewModel.PostulationViewModel
 import java.util.*
 
@@ -176,121 +179,129 @@ fun Interview(navController: NavController, viewModel: PostulationViewModel) {
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
-        LazyColumn(
+        Column(
             modifier = Modifier
                 .padding(paddingValues)
-                .padding(top = 75.dp)
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
         ) {
-            item {
-                Text(
-                    text = stringResource(id = R.string.interview_date),
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Separation()
-                Button(
-                    onClick = {
-                        if (ContextCompat.checkSelfPermission(
-                                context,
-                                Manifest.permission.WRITE_CALENDAR
-                            ) == PackageManager.PERMISSION_GRANTED
-                        ) {
-                            datePickerDialog.show()
-                        } else {
-                            ActivityCompat.requestPermissions(
-                                context as Activity,
-                                arrayOf(Manifest.permission.WRITE_CALENDAR),
-                                1
-                            )
-                        }
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.inversePrimary,
-                        contentColor = MaterialTheme.colorScheme.onSecondary
-                    )
-                ) {
+            BannerAd(width = LocalConfiguration.current.screenWidthDp,
+                height = 50,
+                adunitId = ad_id_banner)
+            LazyColumn(
+                modifier = Modifier
+                    .padding(top = 75.dp)
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
+            ) {
+                item {
                     Text(
-                        if (interviewDate.value.isEmpty()) stringResource(id = R.string.select_date)
-                        else interviewDate.value,
-                        modifier = Modifier.padding(vertical = 5.dp),
-                        fontSize = 16.sp
+                        text = stringResource(id = R.string.interview_date),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Separation()
+                    Button(
+                        onClick = {
+                            if (ContextCompat.checkSelfPermission(
+                                    context,
+                                    Manifest.permission.WRITE_CALENDAR
+                                ) == PackageManager.PERMISSION_GRANTED
+                            ) {
+                                datePickerDialog.show()
+                            } else {
+                                ActivityCompat.requestPermissions(
+                                    context as Activity,
+                                    arrayOf(Manifest.permission.WRITE_CALENDAR),
+                                    1
+                                )
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.inversePrimary,
+                            contentColor = MaterialTheme.colorScheme.onSecondary
+                        )
+                    ) {
+                        Text(
+                            if (interviewDate.value.isEmpty()) stringResource(id = R.string.select_date)
+                            else interviewDate.value,
+                            modifier = Modifier.padding(vertical = 5.dp),
+                            fontSize = 16.sp
+                        )
+                    }
+                    Separation()
+                }
+                item {
+                    Text(
+                        text = stringResource(id = R.string.interview_hour),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+
+                    Separation()
+
+                    Button(
+                        onClick = { timePickerDialog.show() },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.inversePrimary,
+                            contentColor = MaterialTheme.colorScheme.onSecondary
+                        )
+                    ) {
+                        Text(
+                            if (interviewHour.value.isEmpty()) stringResource(id = R.string.select_hour)
+                            else interviewHour.value,
+                            modifier = Modifier.padding(vertical = 5.dp),
+                            fontSize = 16.sp
+                        )
+                    }
+                    Separation()
+                }
+                item {
+                    Text(
+                        text = stringResource(id = R.string.interview_place),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Separation()
+                    OutlinedTextField(
+                        value = interviewPlace.value,
+                        onValueChange = { interviewPlace.value = it },
+                        modifier = Modifier.fillMaxWidth(0.7F)
+                    )
+                    Separation()
+                }
+                item {
+                    Text(
+                        text = stringResource(id = R.string.interview_modal),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Separation()
+                    OutlinedTextField(
+                        value = interviewModal.value,
+                        onValueChange = { interviewModal.value = it },
+                        modifier = Modifier.fillMaxWidth(0.7F)
+                    )
+                    Separation()
+                }
+                item {
+                    Text(
+                        text = stringResource(id = R.string.interview_organizer),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                    Separation()
+                    OutlinedTextField(
+                        value = interviewOrganizer.value,
+                        onValueChange = { interviewOrganizer.value = it },
+                        modifier = Modifier.fillMaxWidth(0.7F)
                     )
                 }
-                Separation()
-            }
-            item {
-                Text(
-                    text = stringResource(id = R.string.interview_hour),
-                    color = MaterialTheme.colorScheme.primary
-                )
-
-                Separation()
-
-                Button(
-                    onClick = { timePickerDialog.show() },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.inversePrimary,
-                        contentColor = MaterialTheme.colorScheme.onSecondary
+                item{
+                    Separation()
+                    Box(modifier = Modifier
+                        .size(300.dp)
                     )
-                ) {
-                    Text(
-                        if (interviewHour.value.isEmpty()) stringResource(id = R.string.select_hour)
-                        else interviewHour.value,
-                        modifier = Modifier.padding(vertical = 5.dp),
-                        fontSize = 16.sp
-                    )
+                    Separation()
                 }
-                Separation()
-            }
-            item {
-                Text(
-                    text = stringResource(id = R.string.interview_place),
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Separation()
-                OutlinedTextField(
-                    value = interviewPlace.value,
-                    onValueChange = { interviewPlace.value = it },
-                    modifier = Modifier.fillMaxWidth(0.7F)
-                )
-                Separation()
-            }
-            item {
-                Text(
-                    text = stringResource(id = R.string.interview_modal),
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Separation()
-                OutlinedTextField(
-                    value = interviewModal.value,
-                    onValueChange = { interviewModal.value = it },
-                    modifier = Modifier.fillMaxWidth(0.7F)
-                )
-                Separation()
-            }
-            item {
-                Text(
-                    text = stringResource(id = R.string.interview_organizer),
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Separation()
-                OutlinedTextField(
-                    value = interviewOrganizer.value,
-                    onValueChange = { interviewOrganizer.value = it },
-                    modifier = Modifier.fillMaxWidth(0.7F)
-                )
-            }
-            item{
-                Separation()
-                Box(modifier = Modifier
-                    .size(300.dp)
-                )
-                Separation()
             }
         }
+
     }
 }
 

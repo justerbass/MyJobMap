@@ -26,15 +26,18 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Alert
+import cl.app.myjobmap.components.BannerAd
 import cl.app.myjobmap.components.Separation
 import cl.app.myjobmap.model.Postulation
 import cl.app.myjobmap.naviagation.Screen
+import cl.app.myjobmap.util.Constants.Companion.ad_id_banner
 import cl.app.myjobmap.viewModel.PostulationViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,105 +86,115 @@ fun Answer(navController: NavController, viewModel: PostulationViewModel) {
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->
-        Column(
+        Column (
             modifier = Modifier
                 .padding(paddingValues)
-                .padding(top = 100.dp)
-                .padding(horizontal = 30.dp)
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
         ) {
-
-            Text(
-                text = stringResource(id = R.string.company),
-                color = MaterialTheme.colorScheme.primary
+            BannerAd(
+                width = LocalConfiguration.current.screenWidthDp,
+                height = 50,
+                adunitId = ad_id_banner
             )
-            Separation()
-            Separation()
-            Text(
-                text = job.value?.company.toString(),
-                color = MaterialTheme.colorScheme.primary
-            )
-            Separation()
-            Separation()
-            Text(
-                text = stringResource(id = R.string.postulation),
-                color = MaterialTheme.colorScheme.primary
-            )
-            Separation()
-            Separation()
-            Text(
-                text = job.value?.job.toString(),
-                color = MaterialTheme.colorScheme.primary
-            )
-            Separation()
-            Separation()
-            Text(
-                text = stringResource(id = R.string.date),
-                color = MaterialTheme.colorScheme.primary
-            )
-            Separation()
-            Separation()
-            Text(
-                text = job.value?.date.toString(),
-                color = MaterialTheme.colorScheme.primary
-            )
-            Separation()
-            Separation()
-            Text(
-                text = stringResource(id = R.string.question_answer),
-                color = MaterialTheme.colorScheme.primary
-            )
-            Separation()
-            Separation()
-            Separation()
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                modifier = Modifier
+                    .padding(top = 100.dp)
+                    .padding(horizontal = 30.dp)
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.background),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
             ) {
-                val negativeAnswer = stringResource(id = R.string.no_answer)
-                val positiveAnswer = stringResource(id = R.string.yes_answer)
 
-                Button(
-                    onClick = {
-                        job.value?.answer = positiveAnswer
-                        viewModel.updatePostulation(job.value!!)
-                        navController.navigate(Screen.UpdateAnswer.route)
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.onBackground,
-                        contentColor = MaterialTheme.colorScheme.onSecondary
-                    )
+                Text(
+                    text = stringResource(id = R.string.company),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                Separation()
+                Text(
+                    text = job.value?.company.toString(),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                Separation()
+                Text(
+                    text = stringResource(id = R.string.postulation),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                Separation()
+                Text(
+                    text = job.value?.job.toString(),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                Separation()
+                Text(
+                    text = stringResource(id = R.string.date),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                Separation()
+                Text(
+                    text = job.value?.date.toString(),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                Separation()
+                Text(
+                    text = stringResource(id = R.string.question_answer),
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Separation()
+                Separation()
+                Separation()
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = stringResource(id = R.string.yes).uppercase(),
-                        modifier = Modifier.padding(20.dp, 10.dp),
-                        fontSize = 20.sp
-                    )
-                }
+                    val negativeAnswer = stringResource(id = R.string.no_answer)
+                    val positiveAnswer = stringResource(id = R.string.yes_answer)
 
-                Button(
-                    onClick = {
-                        navController.navigate(Screen.MainView.route)
-                        job.value?.answer = negativeAnswer
-                        viewModel.updatePostulation(job.value!!)
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        contentColor = MaterialTheme.colorScheme.onSecondary
-                    )
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.no).uppercase(),
-                        modifier = Modifier.padding(20.dp, 10.dp),
-                        fontSize = 20.sp
-                    )
+                    Button(
+                        onClick = {
+                            job.value?.answer = positiveAnswer
+                            viewModel.updatePostulation(job.value!!)
+                            navController.navigate(Screen.UpdateAnswer.route)
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.onBackground,
+                            contentColor = MaterialTheme.colorScheme.onSecondary
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.yes).uppercase(),
+                            modifier = Modifier.padding(20.dp, 10.dp),
+                            fontSize = 20.sp
+                        )
+                    }
+
+                    Button(
+                        onClick = {
+                            navController.navigate(Screen.MainView.route)
+                            job.value?.answer = negativeAnswer
+                            viewModel.updatePostulation(job.value!!)
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.tertiary,
+                            contentColor = MaterialTheme.colorScheme.onSecondary
+                        )
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.no).uppercase(),
+                            modifier = Modifier.padding(20.dp, 10.dp),
+                            fontSize = 20.sp
+                        )
+                    }
                 }
             }
         }
+
     }
     ShowDelete(viewModel, navController, job)
 }

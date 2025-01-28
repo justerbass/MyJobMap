@@ -24,14 +24,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.components.Alert
+import cl.app.myjobmap.components.BannerAd
 import cl.app.myjobmap.components.JobCard
 import cl.app.myjobmap.naviagation.Screen
+import cl.app.myjobmap.util.Constants.Companion.ad_id_banner
 import cl.app.myjobmap.viewModel.PhrasesViewModel
 import cl.app.myjobmap.viewModel.PostulationViewModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -79,6 +86,9 @@ fun MainView(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            BannerAd(width = LocalConfiguration.current.screenWidthDp,
+                height = 50,
+                adunitId = ad_id_banner)
             ShowJobs(navControler = navControler, viewModel = viewModel)
 
         }

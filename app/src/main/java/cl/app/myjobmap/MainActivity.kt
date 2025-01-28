@@ -9,6 +9,7 @@ import cl.app.myjobmap.naviagation.NavManager
 import cl.app.myjobmap.ui.theme.MyJobMapTheme
 import cl.app.myjobmap.viewModel.PhrasesViewModel
 import cl.app.myjobmap.viewModel.PostulationViewModel
+import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
             MyJobMapTheme{
                 NavManager(viewModel, viewModelPhases)
             }
+            MobileAds.initialize(this){}
         }
     }
 }
