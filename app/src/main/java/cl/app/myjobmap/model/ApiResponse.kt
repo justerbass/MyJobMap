@@ -1,10 +1,6 @@
 package cl.app.myjobmap.model
 
-data class ApiResponse(
-    val results: List<PhraseResult>
-)
-
-data class PhraseResult(
+data class PhraseDay (
     val phrase: String,
     val author: String
 )
