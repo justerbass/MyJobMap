@@ -1,5 +1,6 @@
 package cl.app.myjobmap.view
 
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,8 +27,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
+import cl.app.myjobmap.components.Alert
 import cl.app.myjobmap.components.JobCard
 import cl.app.myjobmap.naviagation.Screen
+import cl.app.myjobmap.viewModel.PhrasesViewModel
 import cl.app.myjobmap.viewModel.PostulationViewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -35,14 +38,20 @@ import java.time.temporal.ChronoUnit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
+fun MainView(
+    navControler: NavController,
+    viewModel: PostulationViewModel,
+    viewModels: PhrasesViewModel
+) {
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = stringResource(id = R.string.mainview),
-                        color = MaterialTheme.colorScheme.primary)
+                    Text(
+                        text = stringResource(id = R.string.mainview),
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
@@ -61,7 +70,7 @@ fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
             }
         },
 
-    ) { paddingValues ->
+        ) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
@@ -71,8 +80,11 @@ fun MainView(navControler: NavController, viewModel: PostulationViewModel) {
             verticalArrangement = Arrangement.Center
         ) {
             ShowJobs(navControler = navControler, viewModel = viewModel)
+
         }
     }
+
+    ShowPhrases(viewModel, viewModels)
 
 }
 
@@ -85,7 +97,7 @@ fun ShowJobs(
     LazyColumn {
         items(jobs) { job ->
 
-            val backColor : Color
+            val backColor: Color
 
             if (job.answer == stringResource(id = R.string.no_answer)) {
                 val jobDate = try {
@@ -123,5 +135,23 @@ fun ShowJobs(
     }
 }
 
+@Composable
+fun ShowPhrases(viewModel: PostulationViewModel, viewModels: PhrasesViewModel) {
+    val phrases = viewModels.phrase.collectAsState(initial = null)
+    if (viewModel.alert.value) {
+        if (phrases.value != null) {
+
+            Alert(title = phrases.value?.phrase ?: "",
+                msg = phrases.value?.author ?: "",
+                confirmText = stringResource(id = R.string.accept),
+                onDismissClick = { viewModel.alert.value = true },
+                onConfirmClick = { viewModel.alert.value = false }
+            )
+        }
+
+    } else {
+        viewModel.alert.value = false
+    }
+}
 
 

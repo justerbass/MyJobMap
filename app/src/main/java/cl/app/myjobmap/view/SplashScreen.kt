@@ -1,5 +1,6 @@
 package cl.app.myjobmap.view
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,32 +11,38 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.naviagation.Screen
 import cl.app.myjobmap.viewModel.PhrasesViewModel
+import cl.app.myjobmap.viewModel.PostulationViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navControler: NavController, viewModel: PhrasesViewModel){
+fun SplashScreen(
+    navControler: NavController,
+    viewModels: PhrasesViewModel,
+    viewModel: PostulationViewModel
+) {
 
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = true) {
         delay(3000)
         navControler.navigate(Screen.MainView.route)
 
     }
 
     LaunchedEffect(Unit) {
-        viewModel.getAllApi()
+        viewModels.getAllApi()
+        viewModel.alert.value = true
     }
 
     Box(
         modifier = Modifier
             .fillMaxSize(),
         contentAlignment = Alignment.Center
-    ){
-        Image(painter = painterResource(id = R.drawable.splash),
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.splash),
             contentDescription = stringResource(id = R.string.splash),
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
