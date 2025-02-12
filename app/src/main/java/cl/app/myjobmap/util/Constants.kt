@@ -5,7 +5,7 @@ class Constants {
         const val BASE_URL = "https://frasedeldia.azurewebsites.net/"
         const val ENDPOINT_PHRASES = "api/phrase"
 
-        const val ad_id_banner = "ca-app-pub-3940256099942544/6300978111"
+        const val ad_id_banner = "ca-app-pub-1056440441557989/3671181536"
     }
 
 
