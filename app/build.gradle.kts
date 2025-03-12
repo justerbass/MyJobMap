@@ -8,14 +8,14 @@ plugins {
 
 android {
     namespace = "cl.app.myjobmap"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "cl.app.myjobmap"
         minSdk = 27
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.activity.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -80,15 +81,14 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
 
     //  navegacion
-    implementation("androidx.navigation:navigation-compose:2.8.4")
-    implementation("androidx.compose.ui:ui:1.7.5")
+    implementation("androidx.navigation:navigation-compose:2.8.8")
+    implementation("androidx.compose.ui:ui:1.7.8")
 
     //  gson
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     //  retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
-
 
     //  Coil
     implementation("io.coil-kt:coil-compose:2.7.0")
@@ -99,7 +99,7 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     //    admob
-    implementation("com.google.android.gms:play-services-ads-lite:21.4.0")
+    implementation("com.google.android.gms:play-services-ads-lite:24.0.0")
 
 //    KSP por si acaso
 //    annotationProcessor(libs.room.compiler)

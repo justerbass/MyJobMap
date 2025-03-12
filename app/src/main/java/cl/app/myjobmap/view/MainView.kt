@@ -26,19 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
-import cl.app.myjobmap.components.Alert
 import cl.app.myjobmap.components.BannerAd
 import cl.app.myjobmap.components.JobCard
 import cl.app.myjobmap.naviagation.Screen
 import cl.app.myjobmap.util.Constants.Companion.ad_id_banner
-import cl.app.myjobmap.viewModel.PhrasesViewModel
 import cl.app.myjobmap.viewModel.PostulationViewModel
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -47,8 +41,7 @@ import java.time.temporal.ChronoUnit
 @Composable
 fun MainView(
     navControler: NavController,
-    viewModel: PostulationViewModel,
-    viewModels: PhrasesViewModel
+    viewModel: PostulationViewModel
 ) {
 
     Scaffold(
@@ -86,16 +79,15 @@ fun MainView(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            BannerAd(width = LocalConfiguration.current.screenWidthDp,
+            BannerAd(
+                width = LocalConfiguration.current.screenWidthDp,
                 height = 50,
-                adunitId = ad_id_banner)
+                adunitId = ad_id_banner
+            )
             ShowJobs(navControler = navControler, viewModel = viewModel)
 
         }
     }
-
-    ShowPhrases(viewModel, viewModels)
-
 }
 
 @Composable
@@ -144,24 +136,3 @@ fun ShowJobs(
         }
     }
 }
-
-@Composable
-fun ShowPhrases(viewModel: PostulationViewModel, viewModels: PhrasesViewModel) {
-    val phrases = viewModels.phrase.collectAsState(initial = null)
-    if (viewModel.alert.value) {
-        if (phrases.value != null) {
-
-            Alert(title = phrases.value?.phrase ?: "",
-                msg = phrases.value?.author ?: "",
-                confirmText = stringResource(id = R.string.accept),
-                onDismissClick = { viewModel.alert.value = true },
-                onConfirmClick = { viewModel.alert.value = false }
-            )
-        }
-
-    } else {
-        viewModel.alert.value = false
-    }
-}
-
-

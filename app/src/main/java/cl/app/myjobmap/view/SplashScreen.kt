@@ -14,26 +14,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import cl.app.myjobmap.R
 import cl.app.myjobmap.naviagation.Screen
-import cl.app.myjobmap.viewModel.PhrasesViewModel
 import cl.app.myjobmap.viewModel.PostulationViewModel
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
     navControler: NavController,
-    viewModels: PhrasesViewModel,
     viewModel: PostulationViewModel
 ) {
 
     LaunchedEffect(key1 = true) {
-        delay(3000)
+        delay(2000)
         navControler.navigate(Screen.MainView.route)
 
-    }
-
-    LaunchedEffect(Unit) {
-        viewModels.getAllApi()
-        viewModel.alert.value = true
     }
 
     Box(

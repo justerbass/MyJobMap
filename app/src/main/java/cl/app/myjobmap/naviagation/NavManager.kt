@@ -10,23 +10,22 @@ import cl.app.myjobmap.view.MainView
 import cl.app.myjobmap.view.NewJob
 import cl.app.myjobmap.view.SplashScreen
 import cl.app.myjobmap.view.UpdateAnswer
-import cl.app.myjobmap.viewModel.PhrasesViewModel
 import cl.app.myjobmap.viewModel.PostulationViewModel
 
 
 @Composable
-fun NavManager(viewModel: PostulationViewModel, viewModelPhrases: PhrasesViewModel){
+fun NavManager(viewModel: PostulationViewModel){
     val navControler = rememberNavController()
 
 
     NavHost(navController = navControler, startDestination = Screen.SplashScreen.route){
 
         composable(Screen.SplashScreen.route){
-            SplashScreen(navControler, viewModelPhrases, viewModel)
+            SplashScreen(navControler, viewModel)
         }
 
         composable(Screen.MainView.route){
-            MainView(navControler, viewModel, viewModelPhrases)
+            MainView(navControler, viewModel)
         }
 
         composable(Screen.NewJob.route){

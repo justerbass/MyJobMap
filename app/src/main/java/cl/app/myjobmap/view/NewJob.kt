@@ -42,7 +42,6 @@ import cl.app.myjobmap.model.Postulation
 import cl.app.myjobmap.naviagation.Screen
 import cl.app.myjobmap.util.Constants.Companion.ad_id_banner
 import cl.app.myjobmap.viewModel.PostulationViewModel
-import hilt_aggregated_deps._cl_app_myjobmap_di_ApiModule
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
